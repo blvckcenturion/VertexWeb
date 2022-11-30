@@ -1,0 +1,48 @@
+@using System.ComponentModel.DataAnnotations;
+<div class="card-body">
+    <EditForm Model="product" OnValidSubmit="HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form">
+            <h3 class="tittle" for="Tittle">Agregar Producto</h3>
+
+            <div class="user-box">
+                <input type="text" placeholder="Nombre del producto" required @bind="product.ProductName" />
+            </div>
+            <div class="user-box">
+                <input type="text" placeholder="Precio de venta" required @bind="product.ProductPrice" />
+            </div>
+            <div class="user-box">
+                <input type="text" placeholder="Descripcion" required @bind="product.ProductDescription" />
+            </div>
+            <div class="user-box">
+                <input type="text" placeholder="Categoria" required @bind="product.ProductCategory" />
+            </div>
+            <button type="submit">Registrar</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private AddProduct product = new();
+
+    private async Task HandleSubmit()
+    {
+        Console.WriteLine("Submit");
+    }
+    public class AddProduct
+    {
+        [Required]
+        public string ProductName { get; set; }
+
+        [Required]
+        public string ProductPrice { get; set; }
+
+        [Required]
+        public string ProductDescription { get; set; }
+
+        [Required]
+        public string ProductCategory { get; set; }
+
+    }
+}

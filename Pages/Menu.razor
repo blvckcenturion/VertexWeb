@@ -1,32 +1,52 @@
 @page "/menu"
 
 <div class="menu-page">
-    <div class="menu-options-group">
-        <button class="btn">Ver Menu</button>
-        <button class="btn">Agregar producto</button>
-        <button class="btn">Agregar categoria</button>
+    @if (tab == 1)
+    {
+        <button @onclick="MenuTab" class="btn btn-active">Ver Menu</button>
+        <button @onclick="AddProductTab" class="btn">Agregar producto</button>
+        <button @onclick="AddCategoryTab" class="btn">Agregar categoria</button>
+    }
+    else if (tab == 2)
+    {
+        <button @onclick="MenuTab" class="btn">Ver Menu</button>
+        <button @onclick="AddProductTab" class="btn btn-active">Agregar producto</button>
+        <button @onclick="AddCategoryTab" class="btn">Agregar categoria</button>
+    }
+    else if (tab == 3)
+    {
+        <button @onclick="MenuTab" class="btn">Ver Menu</button>
+        <button @onclick="AddProductTab" class="btn">Agregar producto</button>
+        <button @onclick="AddCategoryTab" class="btn btn-active">Agregar categoria</button>
+    }
+    @if (tab == 1)
+    {
+        <MenuCard />
+    }
+    else if (tab == 2)
+    {
+        <AddProductCard />
+    }
+    else if (tab == 3)
+    {
+        <AddCategoryCard />
+    }
     </div>
-    <div class="menu-categories">
-        <Category CategoryName="@category1Name"/>
-        <Category CategoryName="@category2Name"/>
-        <Category CategoryName="@category2Name"/>
-        <Category CategoryName="@category2Name"/>
-    </div>
-    @* <h1 class="menu-tittle">
-        Hamburguesas
-    </h1>
-    <div class="menu-product-list">
-        <MenuItem/>
-        <MenuItem/>
-        <MenuItem/>
-        <MenuItem/>
-        <MenuItem/>
-        <MenuItem/>
-        <MenuItem/>
-    </div> *@
-</div>
+@code {
+    int tab = 1;
 
-@code{
+    private void MenuTab()
+    {
+        tab = 1;
+    }
+    private void AddProductTab()
+    {
+        tab = 2;
+    }
+    private void AddCategoryTab()
+    {
+        tab = 3;
+    }
     public string category1Name = "Hamburguesas";
     public string category2Name = "Papas";
 }

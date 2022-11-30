@@ -1,6 +1,5 @@
 @page "/addEmployees"
 
-<div class="add-employees-page">
     <div class="top-buttons">
         <button class="btn">Ver Empleados</button>
         <button class="btn">Agregar Empleado</button>
@@ -30,7 +29,7 @@
         <div class="user-box">
             <input type="text" placeholder="Email" required @bind="iRegister.Email" />
         </div>
-        <button type="submit"   >Agregar Empleado</button>
+<button type="submit">Agregar Empleado</button>
     </div>
 </EditForm>
 @code {
@@ -42,24 +41,23 @@
     }
     public class InstitutionRegister
     {
-        [Required]
+        // [Required]
         public string Names { get; set; }
 
-        [Required]
+        //[Required]
         public string Lastnames { get; set; }
 
-        [Required]
+        //[Required]
         public string PhoneNumber { get; set; }
 
-        [Required]
+        //[Required]
         public string Photo { get; set; }
 
-        [Required]
+        // [Required]
         public string Role { get; set; }
 
-        [Required]
+        // [Required]
         public string Email { get; set; }
 
     }
 }
-</div>

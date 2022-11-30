@@ -1,13 +1,6 @@
 @page "/register"
 @using System.ComponentModel.DataAnnotations;
 
-@* por ahora ese quitalo
-    <EditForm OnValidSubmit="HandleSubmit"> solo asi
-
-    <div class="user-box">
-    <input type="text" placeholder="Usuario" required />
-    <label>Email</label>
-    </div> esto solo asi por ahora *@
 <EditForm Model="iRegister" OnValidSubmit="HandleSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />

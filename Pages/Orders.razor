@@ -1,9 +1,11 @@
 @page "/orders"
+@if (tab == 1)
+{
 <div class="orders-page">
     <div class="top-buttons">
-        <button class="btn">Ordenes Entrantes</button>
-        <button class="btn">Ordenes para Entregar</button>
-        <button class="btn">Ordenes Finalizados</button>
+        <button class="btn" style="background-color: var(--purple-main);" @onclick="OnClick1">Ordenes Entrantes</button>
+        <button class="btn" @onclick="OnClick2">Ordenes para Entregar</button>
+        <button class="btn" @onclick="OnClick3">Ordenes Finalizadas</button>
     </div>
     <div class="order-section">
         <div class="order-section-1">
@@ -48,6 +50,113 @@
         </div>
     </div>
 </div>
+}
+else if (tab == 2)
+{
+    <div class="orders-page">
+    <div class="top-buttons">
+        <button class="btn" @onclick="OnClick1">Ordenes Entrantes</button>
+        <button class="btn" style="background-color: var(--purple-main);" @onclick="OnClick2">Ordenes para
+            Entregar</button>
+        <button class="btn" @onclick="OnClick3">Ordenes Finalizadas</button>
+    </div>
+    <div class="order-section">
+        <div class="order-section-1">
+            <h2>ENTRANTES</h2>
+            <div class="orders">
+                <button>Orden 1</button>
+                <button>Orden 2</button>
+            </div>
+        </div>
+        <div class="order-section-2">
+            <OrderCard />
+            <OrderCard />
+        </div>
+        <div class="order-section-3">
+            <div class="title-section">
+                <h2>DETALLES</h2>
+            </div>
+            <div class="order-details">
+                <table>
+                    <tr>
+                        <td>Cliente</td>
+                        <td>Estiven Rojas</td>
+                    </tr>
+                    <tr>
+                        <td>NIT</td>
+                        <td>6969420</td>
+                    </tr>
+                    <tr>
+                        <td>Tipo</td>
+                        <td>En Mesa</td>
+                    </tr>
+                    <tr>
+                        <td>Subtotal</td>
+                        <td>500</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="buttons">
+                <button class="btn-accept">FINALIZAR</button>
+                <button class="btn-deny">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+else if (tab == 3)
+{
+    <div class="orders-page">
+    <div class="top-buttons">
+        <button class="btn" @onclick="OnClick1">Ordenes Entrantes</button>
+        <button class="btn" @onclick="OnClick2">Ordenes para Entregar</button>
+        <button class="btn" style="background-color: var(--purple-main);" @onclick="OnClick3">Ordenes
+            Finalizadas</button>
+    </div>
+    <div class="order-section">
+        <div class="order-section-1">
+            <h2>ENTRANTES</h2>
+            <div class="orders">
+                <button>Orden 1</button>
+                <button>Orden 2</button>
+            </div>
+        </div>
+        <div class="order-section-2">
+            <OrderCard />
+            <OrderCard />
+        </div>
+        <div class="order-section-3">
+            <div class="title-section">
+                <h2>DETALLES</h2>
+            </div>
+            <div class="order-details">
+                <table>
+                    <tr>
+                        <td>Cliente</td>
+                        <td>Estiven Rojas</td>
+                    </tr>
+                    <tr>
+                        <td>NIT</td>
+                        <td>6969420</td>
+                    </tr>
+                    <tr>
+                        <td>Tipo</td>
+                        <td>En Mesa</td>
+                    </tr>
+                    <tr>
+                        <td>Subtotal</td>
+                        <td>500</td>
+                    </tr>
+                </table>
+            </div>
+            @* <div class="buttons">
+                <button class="btn-accept">ACEPTAR</button>
+                <button class="btn-deny">DENEGAR</button>
+                </div> *@
+        </div>
+    </div>
+</div>
+}
 
 @code {
     int tab = 1;

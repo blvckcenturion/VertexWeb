@@ -19,16 +19,24 @@
 .menu-options-group button{
     background-color: var(--purple-light);
     color: var(--main-font-color);
-    transition: all 0.5s ease-in-out;
-    
+    transition: all .3s ease-in-out;
 }
 
-.menu-btn-group button:hover{
-    background-color: var(--purple-light);
+.menu-options-group .btn-active{
+    background-color: var(--purple-main);
+    color: var(--main-font-color);
+}
+
+.menu-options-group button:hover{
+    background-color: var(--purple-main);
+}
+
+.menu-options-group .btn-active:hover{
+    background-color: var(--main-background-color);
 }
 
 .menu-categories{
-    width: 90%;
+    width: 70%;
     height: 80%;
     display: grid;
     grid-template-columns: 1fr;

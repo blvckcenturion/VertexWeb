@@ -1,0 +1,30 @@
+@using System.ComponentModel.DataAnnotations;
+<div class="card-body">
+    <EditForm Model="category" OnValidSubmit="HandleSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div class="form">
+            <h3 class="tittle" for="Tittle">Agregar Categoria</h3>
+
+            <div class="user-box">
+                <input type="text" placeholder="Nombre de la categoria" required @bind="category.CategoryName" />
+            </div>
+
+            <button type="submit">Registrar</button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    private AddCategory category = new();
+
+    private async Task HandleSubmit()
+    {
+        Console.WriteLine("Submit");
+    }
+    public class AddCategory
+    {
+        [Required]
+        public string CategoryName { get; set; }
+    }
+}
