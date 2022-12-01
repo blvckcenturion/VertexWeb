@@ -8,105 +8,105 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = VertexWeb
 build_property.RootNamespace = VertexWeb
-build_property.ProjectDir = /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/
+build_property.ProjectDir = C:\Users\SANTIAGO\Dev\University\4th Semester\IntegrationalProject\Vertex2\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb
+build_property.MSBuildProjectDirectory = C:\Users\SANTIAGO\Dev\University\4th Semester\IntegrationalProject\Vertex2
 build_property._RazorSourceGeneratorDebug = 
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/App.razor]
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQ291bnRlci5yYXpvcg==
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/SurveyPrompt.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL1N1cnZleVByb21wdC5yYXpvcg==
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/_Imports.razor]
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/AddEmployees.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRkRW1wbG95ZWVzLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-b0z70axjhi
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Pages/Dashboard.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-cub6ra87si
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/Dashboard.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRGFzaGJvYXJkLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-omwin17ub0
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Pages/Employees.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRW1wbG95ZWVzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-9s40gx8nw0
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/Employees.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRW1wbG95ZWVzLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-xrjl6moakp
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-ec87wsr0l5
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/Index.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvSW5kZXgucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-xkmhjjr62m
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Pages/Menu.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWVudS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-1nt4wfwu4l
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/Menu.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvTWVudS5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-ognwzzy4b9
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Pages/Orders.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcT3JkZXJzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-ri64km7y3a
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/Orders.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvT3JkZXJzLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-q0xxb6w1qn
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Pages/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVnaXN0ZXIucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-usd1vqtxep
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/Register.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvUmVnaXN0ZXIucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-jjbheokdsw
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/AddCategoryCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFkZENhdGVnb3J5Q2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-zvtiretsmd
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/AddCategoryCard.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0FkZENhdGVnb3J5Q2FyZC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-nvlhrfrpuu
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/AddProductCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEFkZFByb2R1Y3RDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-jyucxojhyb
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/AddProductCard.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0FkZFByb2R1Y3RDYXJkLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-y3nmu4ouvi
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/Category.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENhdGVnb3J5LnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-uimxlhnp8n
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/Category.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0NhdGVnb3J5LnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-1wrirq10da
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/DashboardCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERhc2hib2FyZENhcmQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-rzz0cwn0rq
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/DashboardCard.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0Rhc2hib2FyZENhcmQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-k1umd430r5
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/Dialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-95e6wzg1tp
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/Dialog.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0RpYWxvZy5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-azsxxqxuxp
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/EmployeeCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVtcGxveWVlQ2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-vg0ehnpg4l
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/EmployeeCard.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL0VtcGxveWVlQ2FyZC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-geu3uednvl
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-y9la6rc4f2
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/MainLayout.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01haW5MYXlvdXQucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-tettr78plu
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/MenuCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1lbnVDYXJkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-h03l71fywt
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/MenuItem.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL01lbnVJdGVtLnJhem9y
-build_metadata.AdditionalFiles.CssScope = b-k3z48m9mor
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/MenuItem.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1lbnVJdGVtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = b-bp8restdaj
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/NavMenu.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL05hdk1lbnUucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = b-fdh3rvpoym
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-g0wplgz66e
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Shared/OrderCard.razor]
-build_metadata.AdditionalFiles.TargetPath = U2hhcmVkL09yZGVyQ2FyZC5yYXpvcg==
-build_metadata.AdditionalFiles.CssScope = b-c3kwolg0vf
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Shared/OrderCard.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE9yZGVyQ2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-9zzna7224d
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvRXJyb3IuY3NodG1s
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/_Host.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX0hvc3QuY3NodG1s
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/Pages/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXMvX0xheW91dC5jc2h0bWw=
+[C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

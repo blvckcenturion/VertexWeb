@@ -1,4 +1,57 @@
-.employees-page[b-xrjl6moakp]{
+.form[b-9s40gx8nw0] {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.tittle[b-9s40gx8nw0]{
+    color: var(--main-font-color);
+    font-family: var(--main-font);
+}
+
+.user-box[b-9s40gx8nw0] {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-box input[b-9s40gx8nw0] {
+    width: 60%;
+    height: 70%;
+    font-size: 1rem;
+    color: var(--main-font-color);
+    margin-top: 1rem;
+    border: none;
+    background: var(--purple-light);
+}
+
+.user-box input[b-9s40gx8nw0]::placeholder {
+    color: var(--secondary-font-color);
+    font-family: var(--main-font);
+}
+
+.form button[b-9s40gx8nw0] {
+    width: 40%;
+    height: 50%;
+    font-size: 1.5rem;
+    color: var(--main-font-color);
+    margin-top: 1rem;
+    border: none;
+    background: var(--purple-main);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-family: var(--main-font);
+}
+
+.employees-page[b-9s40gx8nw0]{
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -8,7 +61,7 @@
     margin: 0;
 }
 
-.top-buttons[b-xrjl6moakp] {
+.top-buttons[b-9s40gx8nw0] {
     width: 60%;
     height: 10%;
     display: flex;
@@ -16,16 +69,16 @@
     align-items: center;
 }
 
-.top-buttons button[b-xrjl6moakp] { 
+.top-buttons button[b-9s40gx8nw0] { 
     background-color: var(--purple-light);
     color: var(--main-font-color);
 }
 
-.top-buttons button:hover[b-xrjl6moakp] {
+.top-buttons button:hover[b-9s40gx8nw0] {
     background-color: var(--purple-main);
 }
 
-.employee-container[b-xrjl6moakp] {
+.employee-container[b-9s40gx8nw0] {
     margin-top: 10px;
     height: 80%;
     width: 90%;
@@ -34,7 +87,7 @@
     align-items: center;
 }
 
-.list-container[b-xrjl6moakp] {
+.list-container[b-9s40gx8nw0] {
     width: 100%;
     height: 100%;
     margin-top: 20px;
@@ -46,6 +99,6 @@
     gap: 2rem;
 }
 
-.list-container[b-xrjl6moakp]::-webkit-scrollbar {
+.list-container[b-9s40gx8nw0]::-webkit-scrollbar {
     display: none;
 }

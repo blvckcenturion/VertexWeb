@@ -18,7 +18,13 @@
             <input type="text" placeholder="Ciudad" required @bind="iRegister.City" />
         </div>
         <div class="user-box">
-            <input type="text" placeholder="Categoria de Negocio" required @bind="iRegister.Category" />
+            <select required @bind="iRegister.Category">
+                <option selected>Categoria de Negocio</option>
+                <option value="1">Taqueria</option>
+                <option value="2">Churrasqueria</option>
+                <option value="3">Polleria</option>
+            </select>
+            <!--<input type="" placeholder="Categoria de Negocio" required @bind="iRegister.Category" />-->
         </div>
         <div class="user-box">
             <input type="text" placeholder="Foto" required @bind="iRegister.Photo" />
@@ -26,7 +32,7 @@
         <div class="user-box">
             <input type="text" placeholder="Telefono" required @bind="iRegister.Phone" />
         </div>
-        <button type="submit"   >Registrar</button>
+        <button type="submit">Registrar</button>
     </div>
 </EditForm>
 @code {

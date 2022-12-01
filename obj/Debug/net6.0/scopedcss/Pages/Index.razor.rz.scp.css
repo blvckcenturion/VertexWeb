@@ -1,4 +1,4 @@
-.login-page[b-xkmhjjr62m]{
+.login-page[b-ec87wsr0l5]{
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -7,21 +7,21 @@
     overflow: hidden;
 }
 
-.login-page > div[b-xkmhjjr62m]{
+.login-page > div[b-ec87wsr0l5]{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
 
-.login-page > div:nth-child(1)[b-xkmhjjr62m]{
+.login-page > div:nth-child(1)[b-ec87wsr0l5]{
     width: 40%;
     height: 100%;
     background-color: var(--purple-main);
     background-image: url("https://www.transparenttextures.com/patterns/axiom-pattern.png");
 }
 
-.login-page h1[b-xkmhjjr62m] {
+.login-page h1[b-ec87wsr0l5] {
     font-size: 4rem;
     font-family: var(--main-font);
     color: var(--main-font-color);
@@ -30,11 +30,11 @@
 
 
 
-.login-page > div:nth-child(2)[b-xkmhjjr62m]{ 
+.login-page > div:nth-child(2)[b-ec87wsr0l5]{ 
     width: 60%;
     height: 100%;
 }
-.login-page > div:nth-child(2) > div[b-xkmhjjr62m] {
+.login-page > div:nth-child(2) > div[b-ec87wsr0l5] {
     width: 70%;
     height: 60%;
     display: flex;
@@ -43,7 +43,7 @@
     flex-direction: column;
 }
 
-.login-page > div:nth-child(2) > div > div[b-xkmhjjr62m] {
+.login-page > div:nth-child(2) > div > div[b-ec87wsr0l5] {
     width: 100%;
     display: flex;
     align-items: center;
@@ -51,7 +51,7 @@
     flex-direction: column;
 }
 
-[b-xkmhjjr62m] form{
+[b-ec87wsr0l5] form{
     height: 60%;
     width: 100%;
     display: flex;
@@ -60,7 +60,7 @@
     flex-direction: column;
 }
 
-.login-page h2[b-xkmhjjr62m] {
+.login-page h2[b-ec87wsr0l5] {
     text-align: start;
     font-size: 3rem;
     color: var(--main-font-color);
@@ -68,7 +68,7 @@
     width: 100%;
 }
 
-.login-page h3[b-xkmhjjr62m]{
+.login-page h3[b-ec87wsr0l5]{
     height: 5%;
     width: 100%;
     text-align: center;
@@ -76,13 +76,13 @@
     color: var(--main-font-color);
 }
 
-.login-page h3 span[b-xkmhjjr62m] {
+.login-page h3 span[b-ec87wsr0l5] {
     color: var(--purple-main);
     cursor: pointer;
     font-weight: bold;
 }
 
-.user-box[b-xkmhjjr62m]{
+.user-box[b-ec87wsr0l5]{
     height: 20%;
     width: 100%;
     display: flex;
@@ -90,11 +90,11 @@
     justify-content: space-between;
 }
 
-.user-box input[b-xkmhjjr62m]{
+.user-box input[b-ec87wsr0l5]{
     width: 100%;
 }
 
-[b-xkmhjjr62m] form button{
+[b-ec87wsr0l5] form button{
     height: 20%;
     border: 0;
     border-radius: 5px;
@@ -104,7 +104,7 @@
     transition: all 0.5s ease-in-out;
 }
 
-[b-xkmhjjr62m] form button:hover{
+[b-ec87wsr0l5] form button:hover{
     background-color: transparent;
     border: 2px solid var(--purple-main);
     color: var(--purple-main);

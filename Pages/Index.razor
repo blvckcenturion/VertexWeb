@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using System.ComponentModel.DataAnnotations;
+@using Google.Cloud.Firestore;
 @inject NavigationManager navigationManager;
 
 <PageTitle>Login</PageTitle>
@@ -85,8 +86,11 @@
     private async Task HandleSubmit() 
     {
         Console.WriteLine("Submit");
-        UserSignedIn = true;
-        OpenDialog("Bienvenido", "Bienvenido a Vertex");   
+        @* FireStoreDb db = FirestoreDb.Create("pos1-bef"); *@
+
+
+        @* UserSignedIn = true;
+            OpenDialog("Bienvenido", "Bienvenido a Vertex"); *@
     }
     public class UserLogin
     {

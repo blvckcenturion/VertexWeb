@@ -1,6 +1,7 @@
 @page "/menu"
 
 <div class="menu-page">
+    <div class="top-buttons">
     @if (tab == 1)
     {
         <button @onclick="MenuTab" class="btn btn-active">Ver Menu</button>
@@ -19,18 +20,21 @@
         <button @onclick="AddProductTab" class="btn">Agregar producto</button>
         <button @onclick="AddCategoryTab" class="btn btn-active">Agregar categoria</button>
     }
-    @if (tab == 1)
-    {
-        <MenuCard />
-    }
-    else if (tab == 2)
-    {
-        <AddProductCard />
-    }
-    else if (tab == 3)
-    {
-        <AddCategoryCard />
-    }
+    </div>
+    <div class="main-section">
+        @if (tab == 1)
+        {
+            <MenuCard />
+        }
+        else if (tab == 2)
+        {
+            <AddProductCard />
+        }
+        else if (tab == 3)
+        {
+            <AddCategoryCard />
+        }
+    </div>
     </div>
 @code {
     int tab = 1;

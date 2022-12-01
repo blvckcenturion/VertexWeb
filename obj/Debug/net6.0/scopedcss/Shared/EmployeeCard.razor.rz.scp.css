@@ -1,4 +1,4 @@
-.employee-container[b-geu3uednvl]{
+.employee-container[b-vg0ehnpg4l]{
     width: 250px;
     height: auto;
     display: flex;
@@ -9,7 +9,7 @@
     margin: 10px;
 }
 
-.description[b-geu3uednvl]{
+.description[b-vg0ehnpg4l]{
     margin-top: 0.5rem;
     display: flex;
     justify-content: center;
@@ -17,11 +17,11 @@
     flex-direction: column;
 }
 
-.description p[b-geu3uednvl]{
+.description p[b-vg0ehnpg4l]{
     text-align:center;
 }
 
-.employee-container button[b-geu3uednvl]{
+.employee-container button[b-vg0ehnpg4l]{
     width: 95%;
     height: 30px;
     background-color:blueviolet;
@@ -29,7 +29,7 @@
     border-radius: 5px;
     border: none;
 }
-.image[b-geu3uednvl]{
+.image[b-vg0ehnpg4l]{
     width: 100%;
     height: 200px;
     display: flex;

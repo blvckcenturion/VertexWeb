@@ -1,3 +1,56 @@
+.form {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.tittle{
+    color: var(--main-font-color);
+    font-family: var(--main-font);
+}
+
+.user-box {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-box input {
+    width: 60%;
+    height: 70%;
+    font-size: 1rem;
+    color: var(--main-font-color);
+    margin-top: 1rem;
+    border: none;
+    background: var(--purple-light);
+}
+
+.user-box input::placeholder {
+    color: var(--secondary-font-color);
+    font-family: var(--main-font);
+}
+
+.form button {
+    width: 40%;
+    height: 50%;
+    font-size: 1.5rem;
+    color: var(--main-font-color);
+    margin-top: 1rem;
+    border: none;
+    background: var(--purple-main);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-family: var(--main-font);
+}
+
 .employees-page{
     height: 100vh;
     width: 100vw;

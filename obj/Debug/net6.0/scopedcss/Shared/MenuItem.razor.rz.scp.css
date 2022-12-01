@@ -1,33 +1,33 @@
-.menu-list-item[b-k3z48m9mor]{
+.menu-list-item[b-bp8restdaj]{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 5vh 5vh;
     border-block-end: 1px solid var(--main-font-color);
 }
-.menu-list-item-img[b-k3z48m9mor]{
+.menu-list-item-img[b-bp8restdaj]{
     inline-size: 15vh;
     block-size: 15vh;
     border-radius: 5px;
 }
-.menu-list-item-info[b-k3z48m9mor]{
+.menu-list-item-info[b-bp8restdaj]{
     flex-direction: column;
     justify-content: space-between;
     inline-size: 60%;
     white-space: wrap;
 }
-.menu-list-item-info p[b-k3z48m9mor]{
+.menu-list-item-info p[b-bp8restdaj]{
     font-family: var(--main-font);
     text-overflow: ellipsis;
     word-wrap: break-word;
 }
-.menu-list-item-buttons[b-k3z48m9mor]{
+.menu-list-item-buttons[b-bp8restdaj]{
     flex-direction: column;
     justify-content: space-between;
     inline-size: 15%;
     display: flex;
 }
-.menu-list-item-buttons button[b-k3z48m9mor]{
+.menu-list-item-buttons button[b-bp8restdaj]{
     block-size: 5vh;
     border-radius: 5px;
     border: none;
@@ -38,6 +38,6 @@
     cursor: pointer;
     transition: 0.3s;
 }
-.menu-list-item-buttons button:hover[b-k3z48m9mor]{
+.menu-list-item-buttons button:hover[b-bp8restdaj]{
     background-color: var(--purple-light);
 }

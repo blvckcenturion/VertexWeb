@@ -1,19 +1,90 @@
 @page "/employees"
 
-<div class="employees-page">
-    <div class="top-buttons">
-        <button class="btn">Ver Empleados</button>
-        <button class="btn">Agregar Empleado</button>
-    </div>
-    <div class="employee-container">
-        <h2>Empleados</h2>
+@if (tab == 1)
+{
+        <div class="employees-page">
+            <div class="top-buttons">
+                <button class="btn" style="background-color: var(--purple-main);" @onclick="OnClick1">Ver Empleados</button>
+                <button class="btn" @onclick="OnClick2">Agregar Empleado</button>
+                </div>
+                <div class="employee-container">
+                    <h2>Empleados</h2>
 
-        <div class="list-container">
+                    <div class="list-container">
             @for (int i = 0; i < 20; i++)
             {
                 <EmployeeCard />
             }
+                </div>
+                </div>
+                </div>
+}
+else if (tab == 2)
+{
+    <div class="employees-page">
+        <div class="top-buttons">
+            <button class="btn" @onclick="OnClick1">Ver Empleados</button>
+            <button class="btn" style="background-color: var(--purple-main);" @onclick="OnClick2">Agregar Empleado</button>
         </div>
+        <EditForm Model="iRegister" OnValidSubmit="HandleSubmit">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="form">
+                <h3 class="tittle" for="Tittle">Agregar Empleado</h3>
+
+                <div class="user-box">
+                    <input type="text" placeholder="Nombres" required @bind="iRegister.Names" />
+                </div>
+                <div class="user-box">
+                    <input type="text" placeholder="Apellidos" required @bind="iRegister.Lastnames" />
+                </div>
+                <div class="user-box">
+                    <input type="text" placeholder="Numero de Telefono" required @bind="iRegister.PhoneNumber" />
+                </div>
+                <div class="user-box">
+                    <input type="text" placeholder="Foto" required @bind="iRegister.Photo" />
+                </div>
+                <div class="user-box">
+                    <input type="text" placeholder="Rol" required @bind="iRegister.Role" />
+                </div>
+                <div class="user-box">
+                    <input type="text" placeholder="Email" required @bind="iRegister.Email" />
+                </div>
+                <button type="submit">Agregar Empleado</button>
+            </div>
+        </EditForm>
     </div>
-</div>
+}
+
+@code {
+    int tab = 1;
+
+    void OnClick1()
+    {
+        tab = 1;
+        Console.WriteLine(tab);
+    }
+
+    void OnClick2()
+    {
+        tab = 2;
+        Console.WriteLine(tab);
+    }
+
+    private InstitutionRegister iRegister = new();
+
+    private async Task HandleSubmit()
+    {
+        Console.WriteLine("Submit");
+    }
+    public class InstitutionRegister
+    {
+        public string Names { get; set; }
+        public string Lastnames { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Photo { get; set; }
+        public string Role { get; set; }
+        public string Email { get; set; }
+    }
+}
 

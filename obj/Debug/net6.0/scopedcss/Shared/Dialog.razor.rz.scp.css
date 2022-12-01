@@ -1,4 +1,4 @@
-.modal-dialog .modal-content[b-azsxxqxuxp]{
+.modal-dialog .modal-content[b-95e6wzg1tp]{
     background: rgba(255, 255, 255, 0.3);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -8,21 +8,21 @@
     transition: all 0.5s ease-in-out;
 }
 
-.modal-dialog .modal-content:hover[b-azsxxqxuxp]{
+.modal-dialog .modal-content:hover[b-95e6wzg1tp]{
     background: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(1px);
 }
 
-.modal-dialog .modal-header[b-azsxxqxuxp]{
+.modal-dialog .modal-header[b-95e6wzg1tp]{
     color: var(--purple-main);
 }
 
-.modal-dialog .modal-content h4[b-azsxxqxuxp]{
+.modal-dialog .modal-content h4[b-95e6wzg1tp]{
     font-size: 2rem;
     font-family: var(--main-font);
 }
 
-.modal-dialog .modal-content button[b-azsxxqxuxp]{ 
+.modal-dialog .modal-content button[b-95e6wzg1tp]{ 
     width: 2.5vw;
     height: 2.5vw;
     background-color: var(--purple-main);
@@ -35,14 +35,14 @@
     transition: all 0.5s ease-in-out;
 }
 
-.modal-dialog .modal-content button:hover[b-azsxxqxuxp]{
+.modal-dialog .modal-content button:hover[b-95e6wzg1tp]{
     background-color: var(--purple-light);
     color: var(--purple-main);
 }
 
 .modal-dialog
 
-.modal-dialog .modal-body[b-azsxxqxuxp]{
+.modal-dialog .modal-body[b-95e6wzg1tp]{
     color: #E9F1F3;
     font-family: var(--secondary-font);
 }

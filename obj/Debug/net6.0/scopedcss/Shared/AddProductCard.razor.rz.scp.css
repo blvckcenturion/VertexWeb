@@ -1,0 +1,57 @@
+.card-body[b-jyucxojhyb]{
+    width: 100%;
+    height: 100%;
+}
+
+.form[b-jyucxojhyb] {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.form button[b-jyucxojhyb] {
+    width: 40%;
+    height: 50%;
+    font-size: 1.5rem;
+    color: var(--main-font-color);
+    margin-top: 1rem;
+    border: none;
+    background: var(--purple-main);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-family: var(--main-font);
+}
+
+.tittle[b-jyucxojhyb]{
+    color: var(--main-font-color);
+    font-family: var(--main-font);
+}
+
+.user-box[b-jyucxojhyb] {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-box input[b-jyucxojhyb] {
+    width: 40%;
+    height: 25%;
+    font-size: 1rem;
+    color: var(--main-font-color);
+    margin-top: 1rem;
+    border: none;
+    background: var(--purple-light);
+}
+
+.user-box input[b-jyucxojhyb]::placeholder {
+    color: var(--secondary-font-color);
+    font-family: var(--main-font);
+}
