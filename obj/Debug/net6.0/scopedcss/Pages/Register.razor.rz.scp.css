@@ -1,4 +1,4 @@
-.form[b-usd1vqtxep] {
+.form[b-jjbheokdsw] {
     width: 100%;
     height: 100%;
     display: flex;
@@ -8,7 +8,10 @@
     margin-top: 2rem;
 }
 
-.form button[b-usd1vqtxep] {
+.form input[b-jjbheokdsw]{
+    padding: 0;
+}
+.form button[b-jjbheokdsw] {
     width: 40%;
     height: 50%;
     font-size: 1.5rem;
@@ -21,12 +24,43 @@
     font-family: var(--main-font);
 }
 
-.tittle[b-usd1vqtxep]{
+.tittle[b-jjbheokdsw]{
     color: var(--main-font-color);
     font-family: var(--main-font);
 }
+.form > h3[b-jjbheokdsw]{
+    height: 10%;
+}
 
-.user-box[b-usd1vqtxep] {
+.form > button[b-jjbheokdsw]{
+    height: 10%;
+}
+
+.form > div[b-jjbheokdsw]{
+    width: 90%;
+    height: 70%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form > div > div[b-jjbheokdsw]{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.form > div > div input[b-jjbheokdsw], .form > div > div select[b-jjbheokdsw]{
+    width: 60%;
+    padding: 10px;
+}
+
+
+.user-box[b-jjbheokdsw] {
     width: 100%;
     height: 100%;
     margin-bottom: 0.5rem;
@@ -36,7 +70,7 @@
     justify-content: center;
 }
 
-.user-box input[b-usd1vqtxep] {
+.user-box input[b-jjbheokdsw] {
     width: 40%;
     height: 25%;
     font-size: 1rem;
@@ -46,7 +80,7 @@
     background: var(--purple-light);
 }
 
-select[b-usd1vqtxep] {
+select[b-jjbheokdsw] {
     width: 40%;
     height: 2rem;
     font-size: 1rem;
@@ -57,7 +91,7 @@ select[b-usd1vqtxep] {
     background: var(--purple-light);
 }
 
-.user-box input[b-usd1vqtxep]::placeholder {
+.user-box input[b-jjbheokdsw]::placeholder {
     color: var(--secondary-font-color);
     font-family: var(--main-font);
 }

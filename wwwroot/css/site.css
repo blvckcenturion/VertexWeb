@@ -92,7 +92,7 @@ input {
     transition: all .2s ease-out
 }
 
-input:focus{
+input:focus, select:focus{
     outline: none;
     background-color: transparent;
     border: 2px solid var(--purple-light);
@@ -108,6 +108,27 @@ button:focus{
     background-color: var(--purple-light) !important;
 }
 
-input ::placeholder{
+input ::placeholder, select ::placeholder{
     color: var(--secondary-font-color);
 }
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+}
+
+form input, form select{
+    padding: 10px;
+    min-height: 5vh;
+
+}
+form .validation-errors{
+    font-family: var(--main-font);
+}
+
+/* .validation-errors{
+
+} */

@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SANTIAGO\\Dev\\University\\4th Semester\\IntegrationalProject\\Vertex2\\VertexWeb.csproj": {}
+    "/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/VertexWeb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SANTIAGO\\Dev\\University\\4th Semester\\IntegrationalProject\\Vertex2\\VertexWeb.csproj": {
+    "/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/VertexWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SANTIAGO\\Dev\\University\\4th Semester\\IntegrationalProject\\Vertex2\\VertexWeb.csproj",
+        "projectUniqueName": "/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/VertexWeb.csproj",
         "projectName": "VertexWeb",
-        "projectPath": "C:\\Users\\SANTIAGO\\Dev\\University\\4th Semester\\IntegrationalProject\\Vertex2\\VertexWeb.csproj",
-        "packagesPath": "C:\\Users\\SANTIAGO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SANTIAGO\\Dev\\University\\4th Semester\\IntegrationalProject\\Vertex2\\obj\\",
+        "projectPath": "/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/VertexWeb.csproj",
+        "packagesPath": "/Users/blvckcenturion/.nuget/packages/",
+        "outputPath": "/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\SANTIAGO\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/blvckcenturion/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -51,7 +49,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -63,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/6.0.400/RuntimeIdentifierGraph.json"
         }
       }
     }

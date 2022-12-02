@@ -2,12 +2,12 @@ using Google.Cloud.Firestore;
 
 namespace VertexWeb.Data.Models;
 
-public class Category
+public class OrderDetail
 {
     [FirestoreProperty]
-    public string Name { get; set; }
+    public string ProductId { get; set; }
 
     [FirestoreProperty]
-    public List<string> ProductIds { get; set; }
-
+    public int Quantity { get; set; }
 }
+

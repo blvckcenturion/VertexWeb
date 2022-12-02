@@ -1,66 +1,241 @@
 @page "/register"
 @using System.ComponentModel.DataAnnotations;
+@using Google.Cloud.Firestore;
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+@using System.Security.Cryptography;
+@using System.Text;
 
-<EditForm Model="iRegister" OnValidSubmit="HandleSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
+@inject NavigationManager navigationManager;
+@inject FirestoreService firestoreService;
+
+<EditForm Model="i" OnValidSubmit="HandleSubmit">
     <div class="form">
-
         <h3 class="tittle" for="Tittle">Registrar Negocio</h3>
-        
-        <div class="user-box">
-            <input type="text" placeholder="Nombre de Negocio" required @bind="iRegister.InstitutionName" />
-        </div>
-        <div class="user-box">
-            <input type="text" placeholder="Direccion" required @bind="iRegister.Address" />
-        </div>
-        <div class="user-box">
-            <input type="text" placeholder="Ciudad" required @bind="iRegister.City" />
-        </div>
-        <div class="user-box">
-            <select required @bind="iRegister.Category">
-                <option selected>Categoria de Negocio</option>
-                <option value="1">Taqueria</option>
-                <option value="2">Churrasqueria</option>
-                <option value="3">Polleria</option>
-            </select>
-            <!--<input type="" placeholder="Categoria de Negocio" required @bind="iRegister.Category" />-->
-        </div>
-        <div class="user-box">
-            <input type="text" placeholder="Foto" required @bind="iRegister.Photo" />
-        </div>
-        <div class="user-box">
-            <input type="text" placeholder="Telefono" required @bind="iRegister.Phone" />
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <div>
+            <div>
+                <div class="user-box">
+                <input type="text" placeholder="Nombre de Negocio" required @bind="i.InstitutionName" />
+                </div>
+                <div class="user-box">
+                <input type="text" placeholder="Direccion" required @bind="i.InstitutionAddress" />
+                </div>
+                <div class="user-box">
+                <select required @bind="i.InstitutionCity">
+                    <option value="0">Seleccione una ciudad</option>
+                    <option value="1">Cochabamba</option>
+                    <option value="2">Santa Cruz</option>
+                    <option value="3">La Paz</option>
+                </select>
+                </div>
+                <div class="user-box">
+                <input type="text" placeholder="Categoria" required @bind="i.InstitutionCategory" />
+                </div>
+                <div class="user-box">
+                <input type="text" placeholder="Foto" required @bind="i.InstitutionPhoto" />
+                </div>
+                <div class="user-box">
+                    <input type="text" placeholder="Telefono" required @bind="i.InstitutionPhoneNumber" />
+                    </div>
+                    </div>
+                    <div>
+                        <div class="user-box">
+                            <input type="text" placeholder="Nombre" required @bind="i.AdminName" />
+                        </div>
+                        <div class="user-box">
+                            <input type="text" placeholder="Apellido" required @bind="i.AdminLastName" />
+                        </div>
+                        <div class="user-box">
+                            <input type="text" placeholder="Email" required @bind="i.AdminEmail" />
+                        </div>
+                        <div class="user-box">
+                            <input type="password" placeholder="Password" required @bind="i.AdminPassword" />
+                        </div>
+                        <div class="user-box">
+                            <input type="password" placeholder="Confirmar Password" @bind="i.AdminConfirmPassword" />
+                        </div>
+                    </div>
         </div>
         <button type="submit">Registrar</button>
     </div>
 </EditForm>
-@code {
-    private InstitutionRegister iRegister = new();
+@if (DialogIsOpen)
+{
+    <Dialog Caption="@title" Message="@message" OnClose="@OnDialogClose" Type="Dialog.Category.Okay" />
+}
 
-    private async Task HandleSubmit() 
+@code {
+    private bool DialogIsOpen = false;
+    private string? message;
+    private string? title;
+    private bool InstitutionCreated = false;
+
+    private void OpenDialog(string t, string msg)
     {
-        Console.WriteLine("Submit");
+        DialogIsOpen = true;
+        title = t;
+        message = msg;
     }
-    public class InstitutionRegister
+    private void OnDialogClose(bool isOk)
+    {
+        if (isOk && InstitutionCreated)
+        {
+            navigationManager.NavigateTo("/");
+        }
+        DialogIsOpen = false;
+        return;
+    }
+
+    private RegisterInstitution i = new();
+
+    private EditContext? editContext;
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(i);
+    }
+
+
+    private async Task HandleSubmit()
+    {
+        if (editContext != null && editContext.Validate())
+        {
+            if (i.InstitutionCity == 0)
+            {
+                OpenDialog("Error", "Debe seleccionar una ciudad");
+                return;
+            }
+            if (i.InstitutionPhoneNumber.StartsWith("+591") || i.InstitutionPhoneNumber.StartsWith("6") ||
+            i.InstitutionPhoneNumber.StartsWith("7"))
+            {
+                var firestoreDb = firestoreService.firestoreDb;
+                var collection = firestoreDb.Collection("Institution");
+                var userCollection = firestoreDb.Collection("User");
+
+                QuerySnapshot snapshot = await collection.WhereEqualTo("Name", i.InstitutionName).WhereEqualTo("Status",
+                1).GetSnapshotAsync();
+                if (snapshot.Count > 0)
+                {
+                    OpenDialog("Error", "Ya existe un negocio con ese nombre");
+                }
+                else
+                {
+                    snapshot = await collection.WhereEqualTo("PhoneNumber", i.InstitutionPhoneNumber).WhereEqualTo("Status",
+                    1).GetSnapshotAsync();
+                    if (snapshot.Count > 0)
+                    {
+                        OpenDialog("Error", "Ya existe un negocio con ese numero de telefono");
+                    }
+                    else
+                    {
+                        snapshot = await userCollection.WhereEqualTo("Email", i.AdminEmail).WhereEqualTo("Status", 1).GetSnapshotAsync();
+                        if (snapshot.Count > 0)
+                        {
+                            OpenDialog("Error", "Ya existe un negocio con ese email");
+                        }
+                        else
+                        {
+                            if (i.AdminPassword == i.AdminConfirmPassword)
+                            {
+                                Console.WriteLine("Bien ahi");
+                                Console.WriteLine(i.AdminPassword);
+
+                                using (var sha256 = SHA256.Create())
+                                {
+                                    var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(i.AdminPassword));
+                                    var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+                                    var hashedPassword = hash;
+                                    var institution = await collection.AddAsync(new Institution
+                                    {
+                                        Name = i.InstitutionName,
+                                        City = i.InstitutionCity,
+                                        Photo = i.InstitutionPhoto,
+                                        Address = i.InstitutionAddress,
+                                        Category = i.InstitutionCategory,
+                                        PhoneNumber = i.InstitutionPhoneNumber
+                                    });
+
+                                    var user = await userCollection.AddAsync(new User
+                                    {
+                                        FirstName = i.AdminName,
+                                        LastName = i.AdminLastName,
+                                        Email = i.AdminEmail,
+                                        Password = hashedPassword,
+                                        Status = 1,
+                                        PhoneNumber = i.InstitutionPhoneNumber,
+                                        City = i.InstitutionCity,
+                                        Role = 1,
+                                        InstitutionId = institution.Id
+                                    });
+
+                                    OpenDialog("Exito", "Negocio registrado con exito");
+                                    InstitutionCreated = true;
+                                }
+                            }
+                            else
+                            {
+                                OpenDialog("Error", "Las contraseñas no coinciden");
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                OpenDialog("Error", "El numero de telefono debe empezar con +591 o 6 o 7");
+                return;
+            }
+        }
+    }
+    public class RegisterInstitution
     {
         [Required]
+        [StringLength(50, ErrorMessage = "Nombre demasiado largo."), MinLength(3, ErrorMessage = "Nombre demasiado corto.")]
         public string InstitutionName { get; set; }
 
         [Required]
-        public string Address { get; set; }
+        // 1 : Cochabamba
+        // 2 : Santa Cruz
+        // 3 : La Paz
+        public int InstitutionCity { get; set; }
 
         [Required]
-        public string City { get; set; }
+        public string InstitutionPhoto { get; set; }
 
         [Required]
-        public string Category { get; set; }
+        [StringLength(50, ErrorMessage = "Direccion demasiado larga."), MinLength(3, ErrorMessage = "Direccion demasiado corta.")]
+        public string InstitutionAddress { get; set; }
 
         [Required]
-        public string Photo { get; set; }
+        [StringLength(50, ErrorMessage = "Categoria demasiado larga."), MinLength(3, ErrorMessage = "Categoria demasiado corta.")]
+        public string InstitutionCategory { get; set; }
 
         [Required]
-        public string Phone { get; set; }
+        [StringLength(13, ErrorMessage = "Telefono demasiado largo."), MinLength(8, ErrorMessage = "Telefono demasiado corto.")]
+        public string InstitutionPhoneNumber { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Nombre demasiado largo."), MinLength(3, ErrorMessage = "Nombre demasiado corto.")]
+        public string AdminName { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Apellido demasiado largo."), MinLength(3, ErrorMessage = "Apellido demasiado corto.")]
+        public string AdminLastName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        public string AdminEmail { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Password demasiado largo."), MinLength(8, ErrorMessage = "Password demasiado corto.")]
+        public string AdminPassword { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Password demasiado largo."), MinLength(8, ErrorMessage = "Password demasiado corto.")]
+        public string AdminConfirmPassword { get; set; }
+
 
     }
 }

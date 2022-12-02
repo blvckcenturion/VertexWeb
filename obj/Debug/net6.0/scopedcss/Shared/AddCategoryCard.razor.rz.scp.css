@@ -1,9 +1,9 @@
-.card-body[b-zvtiretsmd]{
+.card-body[b-nvlhrfrpuu]{
     width: 100%;
     height: 100%;
 }
 
-.form[b-zvtiretsmd] {
+.form[b-nvlhrfrpuu] {
     width: 100%;
     height: 100%;
     display: flex;
@@ -13,7 +13,7 @@
 
 }
 
-.form button[b-zvtiretsmd] {
+.form button[b-nvlhrfrpuu] {
     width: 40%;
     height: 50%;
     font-size: 1.5rem;
@@ -26,12 +26,12 @@
     font-family: var(--main-font);
 }
 
-.tittle[b-zvtiretsmd]{
+.tittle[b-nvlhrfrpuu]{
     color: var(--main-font-color);
     font-family: var(--main-font);
 }
 
-.user-box[b-zvtiretsmd] {
+.user-box[b-nvlhrfrpuu] {
     width: 100%;
     height: 100%;
     margin-bottom: 0.5rem;
@@ -41,7 +41,7 @@
     justify-content: center;
 }
 
-.user-box input[b-zvtiretsmd] {
+.user-box input[b-nvlhrfrpuu] {
     width: 40%;
     height: 25%;
     font-size: 1rem;
@@ -51,7 +51,7 @@
     background: var(--purple-light);
 }
 
-.user-box input[b-zvtiretsmd]::placeholder {
+.user-box input[b-nvlhrfrpuu]::placeholder {
     color: var(--secondary-font-color);
     font-family: var(--main-font);
 }
