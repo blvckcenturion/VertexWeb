@@ -5,9 +5,10 @@
 @using VertexWeb.Data.Models;
 @using System.Security.Cryptography;
 @using System.Text;
-
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 @inject NavigationManager navigationManager;
 @inject FirestoreService firestoreService;
+@inject ProtectedLocalStorage protectedLocalStorage;
 
 <PageTitle>Login</PageTitle>
 
@@ -94,20 +95,32 @@
     private async Task HandleSubmit() 
     {
         var firestoreDb = firestoreService.firestoreDb;
-        var collection = firestoreDb.Collection("users");
+        var collection = firestoreDb.Collection("User");
         using (var sha256 = SHA256.Create())
         {
             var hashed = sha256.ComputeHash(Encoding.UTF8.GetBytes(userLogin.Password));
-            var query = collection.WhereEqualTo("Email", userLogin.Email).WhereEqualTo("Password", hashed);
+            var hashedPassword = BitConverter.ToString(hashed).Replace("-", "").ToLower();
+            Console.WriteLine(hashedPassword);
+            Console.WriteLine(userLogin.Email);
+            var query = collection.WhereEqualTo("Email", userLogin.Email).WhereEqualTo("Password", hashedPassword);
 
             var snapshot = await query.GetSnapshotAsync();
+            Console.WriteLine(snapshot.Count);
             if (snapshot.Count == 1)
             {
                 var user = snapshot.Documents[0].ConvertTo<User>();
                 if (user != null)
                 {
-                    UserSignedIn = true;
-                    OpenDialog("Bienvenido", "Bienvenido a Vertex");
+                    if (user.Role != 4)
+                    {
+                        await new AuthService(protectedLocalStorage).StoreCredentials(user.Id, user.Role, user.InstitutionId);
+                        OpenDialog("Bienvenido", "Bienvenido a Vertex");
+                        UserSignedIn = true;
+                    }
+                    else
+                    {
+                        OpenDialog("Error", "No tienes permisos para acceder a esta aplicacion");
+                    }
                 }
             }
             else

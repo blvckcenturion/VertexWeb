@@ -1,4 +1,9 @@
-﻿@inject NavigationManager navigationManager;
+﻿@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+
+@inject NavigationManager navigationManager;
+@inject ProtectedLocalStorage protectedLocalStorage;
 
 @if (navigationManager.Uri != navigationManager.BaseUri)
 {
@@ -9,19 +14,44 @@
         @if (!navigationManager.Uri.Contains("register"))
         {
                 <div>
-                    <div class="@DashboardCss" @onclick="NavigateToDashboard">
-                        <h4><span class="fa-solid fa-house" /> Dashboard</h4>
-                    </div>
-                    <div class="@MenuCss" @onclick="NavigateToMenu">
-                        <h4><span class="fa-solid fa-carrot" /> Menu</h4>
-                    </div>
-                    <div class="@EmployeesCss" @onclick="NavigateToEmployees">
-                        <h4><span class="fa-solid fa-user-group" /> Empleados</h4>
-                    </div>
-                    <div class="@OrdersCss" @onclick="NavigateToOrders">
-                        <h4><span class="fa-solid fa-bell-concierge" /> Ordenes</h4>
-                    </div>
-                </div>
+                @if (credentials != null && credentials.UserType == 1)
+                {
+
+                                                                                                                                                                                                            <div class="@DashboardCss" @onclick="NavigateToDashboard">
+                                                                                                                                                                                                                <h4><span class="fa-solid fa-house" /> Dashboard</h4>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            <div class="@MenuCss" @onclick="NavigateToMenu">
+                                                                                                                                                                                                                <h4><span class="fa-solid fa-carrot" /> Menu</h4>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            <div class="@EmployeesCss" @onclick="NavigateToEmployees">
+                                                                                                                                                                                                                <h4><span class="fa-solid fa-user-group" /> Empleados</h4>
+                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                            <div class="@OrdersCss" @onclick="NavigateToOrders">
+                                                                                                                                                                                                                <h4><span class="fa-solid fa-bell-concierge" /> Ordenes</h4>
+                                                                                                                                                                                                            </div>
+                }
+                else if (credentials != null && credentials.UserType == 2)
+                {
+                            <div class="@DashboardCss" @onclick="NavigateToDashboard">
+                                <h4><span class="fa-solid fa-house" /> Dashboard</h4>
+                            </div>
+                            <div class="@MenuCss" @onclick="NavigateToMenu">
+                                <h4><span class="fa-solid fa-carrot" /> Menu</h4>
+                            </div>
+                            <div class="@OrdersCss" @onclick="NavigateToOrders">
+                                <h4><span class="fa-solid fa-bell-concierge" /> Ordenes</h4>
+                            </div>
+                }
+                else if (credentials != null && credentials.UserType == 3)
+                {
+                            <div class="@DashboardCss" @onclick="NavigateToDashboard">
+                                <h4><span class="fa-solid fa-house" /> Dashboard</h4>
+                            </div>
+                            <div class="@OrdersCss" @onclick="NavigateToOrders">
+                                <h4><span class="fa-solid fa-bell-concierge" /> Ordenes</h4>
+                            </div>
+                }
+                                                                                                                                        </div>
                 <div>
             <div>
                 <h4>
@@ -39,14 +69,16 @@
 }
 
 @code {
-
+    [Parameter]
+    public Credentials credentials { get; set; }
     public string DashboardCss = "link-nav-active";
     public string MenuCss = "link-nav";
     public string EmployeesCss = "link-nav";
     public string OrdersCss = "link-nav";
 
-    private void HandleLogout()
+    private async Task HandleLogout()
     {
+        await new AuthService(protectedLocalStorage).ClearCredentials();
         navigationManager.NavigateTo("/");
     }
 
@@ -97,8 +129,10 @@
         StateHasChanged();
     }
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
+        credentials = await new AuthService(protectedLocalStorage).GetCredentials();
+        StateHasChanged();
         ManageStyles();
         navigationManager.LocationChanged += HandleLocationChanged;
     }
