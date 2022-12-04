@@ -41,6 +41,10 @@
             "Google.Cloud.Firestore": {
               "target": "Package",
               "version": "[3.0.0, )"
+            },
+            "PasswordGenerator": {
+              "target": "Package",
+              "version": "[2.1.0, )"
             }
           },
           "imports": [

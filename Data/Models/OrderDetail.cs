@@ -2,6 +2,7 @@ using Google.Cloud.Firestore;
 
 namespace VertexWeb.Data.Models;
 
+[FirestoreData]
 public class OrderDetail
 {
     [FirestoreProperty]

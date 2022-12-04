@@ -1,4 +1,8 @@
 .menu-card[b-v72gbbp4mj]{
     width: 70%;
-    overflow: scroll;
+}
+
+.no-products[b-v72gbbp4mj]{
+    text-align: center;
+    width: 100%;
 }

@@ -8,7 +8,11 @@
     margin: 0;
 }
 
-.menu-options-group{
+.btn .btn-active {
+    background-color: var(--purple-main);
+}
+
+.top-buttons{
     width: 60%;
     height: 10%;
     display: flex;
@@ -16,22 +20,22 @@
     align-items: center;
 }
 
-.menu-options-group button{
+.top-buttons button{
     background-color: var(--purple-light);
     color: var(--main-font-color);
     transition: all .3s ease-in-out;
 }
 
-.menu-options-group .btn-active{
+.top-buttons .btn-active{
     background-color: var(--purple-main);
     color: var(--main-font-color);
 }
 
-.menu-options-group button:hover{
+.top-buttons button:hover{
     background-color: var(--purple-main);
 }
 
-.menu-options-group .btn-active:hover{
+.top-buttons .btn-active:hover{
     background-color: var(--main-background-color);
 }
 
@@ -135,4 +139,11 @@ h1{
     flex-direction: row;
     justify-content: space-evenly;
     align-items: flex-start;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.main-section::-webkit-scrollbar {
+    display: none;
 }

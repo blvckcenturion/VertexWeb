@@ -1,14 +1,47 @@
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+@using VertexWeb.Data.Services;
+
+@inject NavigationManager navigationManager;
+@inject FirestoreService firestoreService;
+
  <div class="menu-list-item">
     <div class="menu-list-item-img">
-        <img src="https://www.hamburguesas.com/wp-content/uploads/2019/05/hamburguesa-vegetariana.jpg" alt="hamburguesa vegetariana">
+        @if (product.Photo != null)
+        {
+            <img src="@product.Photo" alt="@product.Name">
+        }
+        else
+        {
+            <span class="fa-solid fa-burger"></span>
+        }
     </div>
     <div class="menu-list-item-info">
-        <h2>Nombre</h2>
-        <p>Descripcionaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-        <p>Precio</p>
+        <h2>Nombre: @product.Name</h2>
+        <p>Descripcion: @product.Description</p>
+        <p>Precio: @product.Price bs.</p>
     </div>
     <div class="menu-list-item-buttons">
-        <button>Detalles</button>
-        <button>Eliminar</button>
+        <button @onclick="HandleDelete">Eliminar</button>
     </div>
 </div>
+
+@code {
+    [Parameter]
+    public Product product { get; set; }
+
+    private async void HandleDelete()
+    {
+        var firestoreDb = firestoreService.firestoreDb;
+        var collection = firestoreDb.Collection("Product");
+        var document = collection.Document(product.Id);
+        var snapshot = await document.GetSnapshotAsync();
+        if (snapshot.Exists)
+        {
+            var prod = snapshot.ConvertTo<Product>();
+            prod.Status = 0;
+            await document.SetAsync(prod);
+        }
+    }
+
+}

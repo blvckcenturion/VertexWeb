@@ -5,10 +5,14 @@
 @using VertexWeb.Data.Models;
 @using System.Security.Cryptography;
 @using System.Text;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
 @inject NavigationManager navigationManager;
 @inject FirestoreService firestoreService;
+@inject ProtectedLocalStorage protectedLocalStorage;
 
+@if (render)
+{
 <EditForm Model="i" OnValidSubmit="HandleSubmit">
     <div class="form">
         <h3 class="tittle" for="Tittle">Registrar Negocio</h3>
@@ -61,12 +65,15 @@
         <button type="submit">Registrar</button>
     </div>
 </EditForm>
+}
+
 @if (DialogIsOpen)
 {
     <Dialog Caption="@title" Message="@message" OnClose="@OnDialogClose" Type="Dialog.Category.Okay" />
 }
 
 @code {
+    private bool render = false;
     private bool DialogIsOpen = false;
     private string? message;
     private string? title;
@@ -82,6 +89,7 @@
     {
         if (isOk && InstitutionCreated)
         {
+            InstitutionCreated = false;
             navigationManager.NavigateTo("/");
         }
         DialogIsOpen = false;
@@ -92,8 +100,18 @@
 
     private EditContext? editContext;
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
+        var user = await new AuthService(protectedLocalStorage).GetUser();
+        if (user != null)
+        {
+            navigationManager.NavigateTo("/dashboard");
+        }
+        else
+        {
+            render = true;
+            StateHasChanged();
+        }
         editContext = new EditContext(i);
     }
 
@@ -107,7 +125,7 @@
                 OpenDialog("Error", "Debe seleccionar una ciudad");
                 return;
             }
-            if (i.InstitutionPhoneNumber.StartsWith("+591") || i.InstitutionPhoneNumber.StartsWith("6") ||
+            if (i.InstitutionPhoneNumber.StartsWith("6") ||
             i.InstitutionPhoneNumber.StartsWith("7"))
             {
                 var firestoreDb = firestoreService.firestoreDb;
@@ -184,7 +202,7 @@
             }
             else
             {
-                OpenDialog("Error", "El numero de telefono debe empezar con +591 o 6 o 7");
+                OpenDialog("Error", "El numero de telefono debe empezar con 6 o 7");
                 return;
             }
         }
@@ -213,7 +231,7 @@
         public string InstitutionCategory { get; set; }
 
         [Required]
-        [StringLength(13, ErrorMessage = "Telefono demasiado largo."), MinLength(8, ErrorMessage = "Telefono demasiado corto.")]
+        [StringLength(9, ErrorMessage = "Telefono demasiado largo."), MinLength(8, ErrorMessage = "Telefono demasiado corto.")]
         public string InstitutionPhoneNumber { get; set; }
 
         [Required]

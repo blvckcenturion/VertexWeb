@@ -1,178 +1,557 @@
 @page "/orders"
-@if (tab == 1)
+@using System.ComponentModel.DataAnnotations;
+@using Google.Cloud.Firestore;
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+@using System.Security.Cryptography;
+@using System.Text;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using PasswordGenerator;
+@inject NavigationManager navigationManager;
+@inject FirestoreService firestoreService;
+@inject ProtectedLocalStorage protectedLocalStorage;
+
+@if (render)
 {
-<div class="orders-page">
-    <div class="top-buttons">
-        <button class="btn" style="background-color: var(--purple-main);" @onclick="OnClick1">Ordenes Entrantes</button>
-        <button class="btn" @onclick="OnClick2">Ordenes para Entregar</button>
-        <button class="btn" @onclick="OnClick3">Ordenes Finalizadas</button>
-    </div>
-    <div class="order-section">
+                    <div class="orders-page">
+        @if (user.Role == 1 || user.Role == 2)
+        {
+                <div class="order-section">
+                    <div class="order-section-1">
+                    @if (user.Role == 1)
+                    {
+                                <h2>HISTORIAL</h2>
+                    }
+                    else
+                    {
+                                <h2>A PREPARAR</h2>
+                    }
+                            <div class="orders">
+                            @if (user.Role == 1)
+                            {
+                                @foreach (var order in orderAdmin)
+                                {
+                                    @if(order.Id == current.Id){
+                                        <button class="btn btn-active">Orden @order.Id</button>
+                                    } else {
+                                        <button class="btn" @onclick="() => SetCurrent(order.Id)">Orden @order.Id</button>
+                                    }
+                                }
+                                @if(orderAdmin.Count == 0){
+                                    <p>No hay ordenes previas.</p>
+                                }
+                            }
+                            else
+                            {
+                                @foreach (var order in orderCook)
+                                {
+                                    @if(order.Id == current.Id){
+                                        <button class="btn btn-active">Orden @order.Id</button>
+                                    } else {
+                                        <button class="btn" @onclick="() => SetCurrent(order.Id)">Orden @order.Id</button>
+                                    }
+                                }
+                                @if(orderCook.Count == 0){
+                                    <p>No hay ordenes por preparar.</p>
+                                }
+                            }
+                        </div>
+                </div>
+                <div class="order-section-2">
+                    @if (current != null && productList.Count > 0)
+                    {
+                                <OrderCard order="@current" products="@productList" />
+                    }
+                    else
+                    {
+                                <p>No existen ordenes para mostrar.</p>
+                    }
+                            </div>
+                            <div class="order-section-3">
+                                <div class="title-section">
+                                    <h2>DETALLES</h2>
+                                </div>
+                                <div class="order-details">
+                        @if (current != null && currentUser != null)
+                        {
+                                                                            <table>
+                                                                                <tr>
+                                                                                    <td>Cliente</td>
+                                                                                    <td>@currentUser.FirstName @currentUser.LastName</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>NIT</td>
+                                    @if (current.NIT != null)
+                                    {
+                                                    <td>@current.NIT</td>
+                                    }
+                                    else
+                                    {
+                                                    <td>Sin NIT</td>
+                                    }
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipo</td>
+                                    @if (current.OrderType == 1)
+                                    {
+                                                    <td>Para Recoger</td>
+                                    }
+                                    else
+                                    {
+                                                                                                        <td>En Mesa</td>
+                                    }
+                                                                                </tr>
+                                @if (current.OrderType == 2)
+                                {
+                                                <tr>
+                                                    <td>Mesa</td>
+                                                    <td>@current.OrderDetail</td>
+                                                </tr>
+                                }
+                                                                                <tr>
+                                                                                    <td>Subtotal</td>
+                                                                                    <td>
+                                        @current.Total
+                                                                                    </td>
+                                                                                    </tr>
+                                                                                    </table>
+                        }
+                        else
+                        {
+                                    <p>No existen detalles para mostrar.</p>
+                        }
+                                                    </div>
+                    @if (user.Role == 2 && current != null && currentUser != null)
+                    {
+                                                                        <div class="buttons">
+                                                                                <button class="btn-accept" @onclick="CookFinish">ENTREGAR</button>
+                                                                                <button class="btn-deny" @onlick="Cancel">CANCELAR</button>
+                                                                                </div>
+                    }
+                            </div>
+                            </div>
+        }
+        else
+        {
+                                        <div class="top-buttons">
+                                            <button class="@Tab1Css" @onclick="OnClick1">Ordenes Entrantes</button>
+                                            <button class="@Tab2Css" @onclick="OnClick2">Ordenes para Entregar</button>
+                                            <button class="@Tab3Css" @onclick="OnClick3">Ordenes Finalizadas</button>
+                                            </div>
+                                            <div class="order-section">
         <div class="order-section-1">
-            <h2>ENTRANTES</h2>
+            @if (tab == 1)
+                    {
+                                                                <h2>ENTRANTES</h2>
+                    }
+                    else if (tab == 2)
+                    {
+                                <h2>PARA ENTREGAR</h2>
+                    }
+                    else
+                    {
+                                <h2>FINALIZADAS</h2>
+                    }
             <div class="orders">
-                <button>Orden 1</button>
-                <button>Orden 2</button>
+                        @if (tab == 1)
+                        {
+                            @foreach (var order in orderWaiterEntry)
+                            {
+                                @if (order.Id == current.Id)
+                                {
+                                            <button class="btn btn-active">Orden @order.Id</button>
+                                }
+                                else
+                                {
+                                            <button class="btn" @onclick="() => SetCurrent(order.Id)">Orden @order.Id</button>
+                                }
+                            }
+                            @if (orderWaiterEntry.Count == 0)
+                            {
+                                        <p>No hay ordenes entrantes.</p>
+                            }
+                        }
+                        else if (tab == 2)
+                        {
+                            @foreach (var order in orderWaiterDeliver)
+                            {
+                                @if (order.Id == current.Id)
+                                {
+                                            <button class="btn btn-active">Orden @order.Id</button>
+                                }
+                                else
+                                {
+                                            <button class="btn" @onclick="() => SetCurrent(order.Id)">Orden @order.Id</button>
+                                }
+                            }
+                            @if (orderWaiterDeliver.Count == 0)
+                            {
+                                        <p>No hay ordenes para entregar.</p>
+                            }
+                        }
+                        else
+                        {
+                            @foreach (var order in orderWaiterFinished)
+                            {
+                                @if (order.Id == current.Id)
+                                {
+                                            <button class="btn btn-active">Orden @order.Id</button>
+                                }
+                                else
+                                {
+                                            <button class="btn" @onclick="() => SetCurrent(order.Id)">Orden @order.Id</button>
+                                }
+                            }
+                            @if (orderWaiterFinished.Count == 0)
+                            {
+                                        <p>No hay ordenes finalizadas.</p>
+                            }
+                        }
+                                </div>
+                                </div>
+                                <div class="order-section-2">
+                    @if (current != null && currentUser != null && productList.Count > 0)
+                    {
+                                <OrderCard order="@current" products="@productList"/>
+                    }
+                    else
+                    {
+                                <p>No existen ordenes para mostrar.</p>
+                    }
+                            </div>
+                            <div class="order-section-3">
+                                <div class="title-section">
+                                    <h2>DETALLES</h2>
+                                </div>
+                                <div class="order-details">
+                        @if (current != null && currentUser != null)
+                        {
+                                                            <table>
+                                                                <tr>
+                                                                    <td>Cliente</td>
+                                                                    <td>@currentUser.FirstName @currentUser.LastName</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>NIT</td>
+                                    @if (@current.NIT != null)
+                                    {
+                                                    <td>@current.NIT</td>
+                                    }
+                                    else
+                                    {
+                                                    <td>Sin NIT</td>
+                                    }
+                                                </tr>
+                                                <tr>
+                                                    <td>Tipo</td>
+                                    @if (current.OrderType == 1)
+                                    {
+                                                    <td>Para Recoger</td>
+                                    }
+                                    else
+                                    {
+                                                                            <td>En Mesa</td>
+                                    }
+                                                                    </tr>
+                                @if (current.OrderType == 2)
+                                {
+                                                <tr>
+                                                    <td>Mesa</td>
+                                                    <td>@current.OrderDetail</td>
+                                                </tr>
+                                }
+                                            <tr>
+                                                <td>Subtotal</td>
+                                                                    <td>
+                                        @current.Total
+                                                                    </td>
+                                                                    </tr>
+                                                                    </table>
+                        }
+                        else
+                        {
+                                                                    <p>No existen detalles para mostrar.</p>
+                        }
+
+                                                                </div>
+                    @if (current != null && currentUser != null)
+                    {
+                        @if (tab == 1)
+                        {
+                            <div class="buttons">
+                                <button class="btn-accept" @onclick="ApproveOrder">ACEPTAR</button>
+                                <button class="btn-deny" @onclick="Cancel">CANCELAR</button>
+                            </div>
+                        }
+                        else if (tab == 2)
+                        {
+                            <div class="buttons">
+                                <button class="btn-accept" @onclick="DeliverOrder">FINALIZAR</button>
+                                <button class="btn-deny" @onclick="Cancel">CANCELAR</button>
+                            </div>
+                        }
+                    }
             </div>
         </div>
-        <div class="order-section-2">
-            <OrderCard />
-            <OrderCard />
-        </div>
-        <div class="order-section-3">
-            <div class="title-section">
-                <h2>DETALLES</h2>
-            </div>
-            <div class="order-details">
-                <table>
-                    <tr>
-                        <td>Cliente</td>
-                        <td>Estiven Rojas</td>
-                    </tr>
-                    <tr>
-                        <td>NIT</td>
-                        <td>6969420</td>
-                    </tr>
-                    <tr>
-                        <td>Tipo</td>
-                        <td>En Mesa</td>
-                    </tr>
-                    <tr>
-                        <td>Subtotal</td>
-                        <td>500</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="buttons">
-                <button class="btn-accept">ACEPTAR</button>
-                <button class="btn-deny">DENEGAR</button>
-            </div>
-        </div>
-    </div>
-</div>
-}
-else if (tab == 2)
-{
-    <div class="orders-page">
-    <div class="top-buttons">
-        <button class="btn" @onclick="OnClick1">Ordenes Entrantes</button>
-        <button class="btn" style="background-color: var(--purple-main);" @onclick="OnClick2">Ordenes para
-            Entregar</button>
-        <button class="btn" @onclick="OnClick3">Ordenes Finalizadas</button>
-    </div>
-    <div class="order-section">
-        <div class="order-section-1">
-            <h2>ENTRANTES</h2>
-            <div class="orders">
-                <button>Orden 1</button>
-                <button>Orden 2</button>
-            </div>
-        </div>
-        <div class="order-section-2">
-            <OrderCard />
-            <OrderCard />
-        </div>
-        <div class="order-section-3">
-            <div class="title-section">
-                <h2>DETALLES</h2>
-            </div>
-            <div class="order-details">
-                <table>
-                    <tr>
-                        <td>Cliente</td>
-                        <td>Estiven Rojas</td>
-                    </tr>
-                    <tr>
-                        <td>NIT</td>
-                        <td>6969420</td>
-                    </tr>
-                    <tr>
-                        <td>Tipo</td>
-                        <td>En Mesa</td>
-                    </tr>
-                    <tr>
-                        <td>Subtotal</td>
-                        <td>500</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="buttons">
-                <button class="btn-accept">FINALIZAR</button>
-                <button class="btn-deny">CANCELAR</button>
-            </div>
-        </div>
-    </div>
-</div>
-}
-else if (tab == 3)
-{
-    <div class="orders-page">
-    <div class="top-buttons">
-        <button class="btn" @onclick="OnClick1">Ordenes Entrantes</button>
-        <button class="btn" @onclick="OnClick2">Ordenes para Entregar</button>
-        <button class="btn" style="background-color: var(--purple-main);" @onclick="OnClick3">Ordenes
-            Finalizadas</button>
-    </div>
-    <div class="order-section">
-        <div class="order-section-1">
-            <h2>ENTRANTES</h2>
-            <div class="orders">
-                <button>Orden 1</button>
-                <button>Orden 2</button>
-            </div>
-        </div>
-        <div class="order-section-2">
-            <OrderCard />
-            <OrderCard />
-        </div>
-        <div class="order-section-3">
-            <div class="title-section">
-                <h2>DETALLES</h2>
-            </div>
-            <div class="order-details">
-                <table>
-                    <tr>
-                        <td>Cliente</td>
-                        <td>Estiven Rojas</td>
-                    </tr>
-                    <tr>
-                        <td>NIT</td>
-                        <td>6969420</td>
-                    </tr>
-                    <tr>
-                        <td>Tipo</td>
-                        <td>En Mesa</td>
-                    </tr>
-                    <tr>
-                        <td>Subtotal</td>
-                        <td>500</td>
-                    </tr>
-                </table>
-            </div>
-            @* <div class="buttons">
-                <button class="btn-accept">ACEPTAR</button>
-                <button class="btn-deny">DENEGAR</button>
-                </div> *@
-        </div>
-    </div>
+        }
 </div>
 }
 
 @code {
-    int tab = 1;
+    
+    public Order? current;
+    public User? currentUser;
+    public List<Order> orderAdmin = new List<Order>();
+    public List<Order> orderCook = new List<Order>();
+    public List<Product> productList = new List<Product>();
+
+    public List<Order> orderWaiterEntry = new List<Order>();
+    public List<Order> orderWaiterDeliver = new List<Order>();
+    public List<Order> orderWaiterFinished = new List<Order>();
+    public User user;
+    public bool render = false;
+    public int tab = 1;
+    public string Tab1Css { get; set; } = "btn btn-active";
+    public string Tab2Css { get; set; } = "btn";
+    public string Tab3Css { get; set; } = "btn";
+
+    private FirestoreChangeListener firestoreChangeListener;
+    private void HandleStyles()
+    {
+        if (tab == 1)
+        {
+            Tab1Css = "btn btn-active";
+            Tab2Css = "btn";
+            Tab3Css = "btn";
+        }
+        else if (tab == 2)
+        {
+            Tab1Css = "btn";
+            Tab2Css = "btn btn-active";
+            Tab3Css = "btn";
+        }
+        else
+        {
+            Tab1Css = "btn";
+            Tab2Css = "btn";
+            Tab3Css = "btn btn-active";
+        }
+        StateHasChanged();
+    }
+
+    private async void SetCurrent(string id){
+        productList = new List<Product>();
+        currentUser = null;
+        if(user.Role == 1) {
+            current = orderAdmin.FirstOrDefault(x => x.Id == id);
+        } else if(user.Role == 2){ 
+            current = orderCook.FirstOrDefault(x => x.Id == id);
+        } else {
+            if(tab == 1) {
+                current = orderWaiterEntry.FirstOrDefault(x => x.Id == id);
+            } else if(tab == 2) {
+                current = orderWaiterDeliver.FirstOrDefault(x => x.Id == id);
+            } else {
+                current = orderWaiterFinished.FirstOrDefault(x => x.Id == id);
+            }
+        }
+        if(current !=null){
+            var firestoreDb = firestoreService.firestoreDb;
+            var collection = firestoreDb.Collection("User");
+            var productCollection = firestoreDb.Collection("Product");
+            var query = collection.Document(current.UserId);
+            var snapshot = query.GetSnapshotAsync().Result;
+            currentUser = snapshot.ConvertTo<User>();
+            foreach(var item in current.Detail){
+                var prod = productCollection.Document(item.ProductId);
+                var prodSnap = prod.GetSnapshotAsync().Result;
+                var product = prodSnap.ConvertTo<Product>();
+                productList.Add(product);
+            }
+        }
+        await InvokeAsync(() => StateHasChanged());
+    }
+
 
     private void OnClick1()
     {
+        Console.WriteLine("HOLA"); 
         tab = 1;
+        current = null;
+        currentUser = null;
+        productList = new List<Product>();
+        if(orderWaiterEntry.Count > 0){
+            SetCurrent(orderWaiterEntry[0].Id);
+        }
+        HandleStyles();
     }
 
     private void OnClick2()
     {
         tab = 2;
+        current = null;
+        currentUser = null;
+        productList = new List<Product>();
+        if(orderWaiterDeliver.Count > 0){
+            SetCurrent(orderWaiterDeliver[0].Id);
+        }
+        HandleStyles();
     }
 
     private void OnClick3()
     {
         tab = 3;
+        current = null;
+        currentUser = null;
+        productList = new List<Product>();
+        if(orderWaiterFinished.Count > 0){
+            SetCurrent(orderWaiterFinished[0].Id);
+        }
+        HandleStyles();
     }
+
+    private async void CookFinish()
+    {
+        var firestoreDb = firestoreService.firestoreDb;
+        var collection = firestoreDb.Collection("Order");
+        var query = collection.Document(current.Id);
+        var snapshot = query.GetSnapshotAsync().Result;
+        var order = snapshot.ConvertTo<Order>();
+        order.Status = 3;
+        await query.SetAsync(order);
+    }
+
+    private async void ApproveOrder()
+    {
+        var firestoreDb = firestoreService.firestoreDb;
+        var collection = firestoreDb.Collection("Order");
+        var query = collection.Document(current.Id);
+        var snapshot = query.GetSnapshotAsync().Result;
+        var order = snapshot.ConvertTo<Order>();
+        order.Status = 2;
+        await query.SetAsync(order);
+        Console.WriteLine("HOLA");
+    }
+
+    private async void DeliverOrder()
+    {
+        var firestoreDb = firestoreService.firestoreDb;
+        var collection = firestoreDb.Collection("Order");
+        var query = collection.Document(current.Id);
+        var snapshot = query.GetSnapshotAsync().Result;
+        var order = snapshot.ConvertTo<Order>();
+        order.Status = 4;
+        await query.SetAsync(order);
+    }
+
+    private async void Cancel()
+    {
+        var firestoreDb = firestoreService.firestoreDb;
+        var collection = firestoreDb.Collection("Order");
+        var query = collection.Document(current.Id);
+        var snapshot = query.GetSnapshotAsync().Result;
+        var order = snapshot.ConvertTo<Order>();
+        order.Status = 5;
+        await query.SetAsync(order);
+        StateHasChanged();
+    }
+    protected override async void OnAfterRender(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            user = await new AuthService(protectedLocalStorage).GetUser();
+            if (user != null)
+            {
+                if (user.Role == 1 || user.Role == 2 || user.Role == 3)
+                {
+                    var firestoreDb = firestoreService.firestoreDb;
+                    var collection = firestoreDb.Collection("Order");
+                    firestoreChangeListener = collection
+                    .WhereEqualTo("InstitutionId", user.InstitutionId)
+                    .Listen(async (snapshot) =>
+                    {
+                        orderAdmin.Clear();
+                        orderCook.Clear();
+                        orderWaiterEntry.Clear();
+                        orderWaiterDeliver.Clear();
+                        orderWaiterFinished.Clear();
+
+                        if (user.Role == 1)
+                        {
+                            orderAdmin = snapshot.Documents.Select(x => x.ConvertTo<Order>()).ToList();
+                            if(orderAdmin.Count > 0){
+                                
+                                SetCurrent(orderAdmin.FirstOrDefault().Id);
+                            } else {
+                                current = null;
+                                currentUser = null;
+                                productList = new List<Product>();
+                                await InvokeAsync(() => StateHasChanged());
+                            }
+                        }
+                        else if (user.Role == 2)
+                        {
+                            orderCook = snapshot.Documents.Select(x => x.ConvertTo<Order>()).Where(x => x.Status == 2).ToList();
+                            if(orderCook.Count > 0){
+                                SetCurrent(orderCook.FirstOrDefault().Id);
+                            } else {
+                                current = null;
+                                currentUser = null;
+                                productList = new List<Product>();
+                                await InvokeAsync(() => StateHasChanged());
+                            }
+                        }
+                        else if (user.Role == 3)
+                        {
+                            orderWaiterEntry = snapshot.Documents.Select(x => x.ConvertTo<Order>()).Where(x => x.Status == 1).ToList();
+                            orderWaiterDeliver = snapshot.Documents.Select(x => x.ConvertTo<Order>()).Where(x => x.Status == 3).ToList();
+                            orderWaiterFinished = snapshot.Documents.Select(x => x.ConvertTo<Order>()).Where(x => x.Status == 4).ToList();
+                            if (tab == 1)
+                            {
+                                if(orderWaiterEntry.Count > 0){
+                                    SetCurrent(orderWaiterEntry.FirstOrDefault().Id);
+                                } else {
+                                    current = null;
+                                    currentUser = null;
+                                    productList = new List<Product>();
+                                    await InvokeAsync(() => StateHasChanged());
+                                }
+                            }
+                            else if (tab == 2)
+                            {
+                                if(orderWaiterDeliver.Count > 0){
+                                    SetCurrent(orderWaiterDeliver.FirstOrDefault().Id);
+                                }  else {
+                                    current = null;
+                                    currentUser = null;
+                                    productList = new List<Product>();
+                                    await InvokeAsync(() => StateHasChanged());
+                                }
+                            }
+                            else
+                            {
+                                if(orderWaiterFinished.Count > 0){
+                                    SetCurrent(orderWaiterFinished.FirstOrDefault().Id);
+                                } else {
+                                    current = null;
+                                    currentUser = null;
+                                    productList = new List<Product>();
+                                    await InvokeAsync(() => StateHasChanged());
+                                }
+                            }
+                        }
+                    });
+                    render = true;
+                    HandleStyles();
+                    StateHasChanged();
+                    return;
+                }
+            }
+
+            navigationManager.NavigateTo("/");
+            await new AuthService(protectedLocalStorage).ClearCredentials();
+        }
+    }
+
 }

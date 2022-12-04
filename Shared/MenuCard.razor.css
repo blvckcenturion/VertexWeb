@@ -1,4 +1,8 @@
 .menu-card{
     width: 70%;
-    overflow: scroll;
+}
+
+.no-products{
+    text-align: center;
+    width: 100%;
 }

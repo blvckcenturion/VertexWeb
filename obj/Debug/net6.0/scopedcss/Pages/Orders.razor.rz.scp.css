@@ -22,6 +22,11 @@
     transition: all 0.5s ease-in-out;
 }
 
+
+.top-buttons button:focus[b-q0xxb6w1qn]{
+    outline: none; 
+}
+
 .top-buttons button:hover[b-q0xxb6w1qn] {
     background-color: var(--purple-main);
 }
@@ -162,6 +167,20 @@ table[b-q0xxb6w1qn] {
     color: var(--main-font-color);
     font-family: var(--secondary-font);
 }
+
+
+.top-buttons .btn-active[b-q0xxb6w1qn], .orders .btn-active[b-q0xxb6w1qn] {
+    background-color: var(--purple-main);
+}
+
+.order-section-2 > p[b-q0xxb6w1qn], .order-details > p[b-q0xxb6w1qn] {
+    text-align: center;
+}
+
+.orders button[b-q0xxb6w1qn]{
+    font-size: 1rem;
+}
+
 
 
 

@@ -11,8 +11,9 @@
 @inject ProtectedLocalStorage protectedLocalStorage;
 
 <PageTitle>Login</PageTitle>
-
-<div class="login-page">
+@if (render)
+{
+    <div class="login-page">
     <div>
         <div>
             <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,14 +49,16 @@
         </div>
     </div>
 </div>
+}
 
-@if(DialogIsOpen)
+@if (DialogIsOpen)
 {
     <Dialog Caption="@title" Message="@message" OnClose="@OnDialogClose" Type="Dialog.Category.Okay" />
 }
 
-@code {
 
+@code {
+    private bool render = false;
     private bool DialogIsOpen = false;
     private string? message;
     private string? title;
@@ -71,19 +74,26 @@
 
     private void OnDialogClose(bool isOk)
     {
-        if (isOk)
+        if (isOk && UserSignedIn)
         {
-            if (UserSignedIn)
-            {
-                navigationManager.NavigateTo("/dashboard", true);
-            }
+            navigationManager.NavigateTo("/dashboard", true);
         }
         DialogIsOpen = false;
         return;
     }
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
+        var user = await new AuthService(protectedLocalStorage).GetUser();
+        if (user != null)
+        {
+            navigationManager.NavigateTo("/dashboard");
+        }
+        else
+        {
+            render = true;
+            StateHasChanged();
+        }
         editContext = new EditContext(userLogin);
     }
 
@@ -100,9 +110,8 @@
         {
             var hashed = sha256.ComputeHash(Encoding.UTF8.GetBytes(userLogin.Password));
             var hashedPassword = BitConverter.ToString(hashed).Replace("-", "").ToLower();
-            Console.WriteLine(hashedPassword);
-            Console.WriteLine(userLogin.Email);
-            var query = collection.WhereEqualTo("Email", userLogin.Email).WhereEqualTo("Password", hashedPassword);
+            var query = collection.WhereEqualTo("Email", userLogin.Email).WhereEqualTo("Status", 1).WhereEqualTo("Password",
+            hashedPassword);
 
             var snapshot = await query.GetSnapshotAsync();
             Console.WriteLine(snapshot.Count);

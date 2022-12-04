@@ -1,4 +1,15 @@
 @using System.ComponentModel.DataAnnotations;
+@using Google.Cloud.Firestore;
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+@using System.Security.Cryptography;
+@using System.Text;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using PasswordGenerator;
+@inject NavigationManager navigationManager;
+@inject FirestoreService firestoreService;
+@inject ProtectedLocalStorage protectedLocalStorage;
+
 <div class="card-body">
     <EditForm Model="product" OnValidSubmit="HandleSubmit">
         <DataAnnotationsValidator />
@@ -16,32 +27,122 @@
                 <input type="text" placeholder="Descripcion" required @bind="product.ProductDescription" />
             </div>
             <div class="user-box">
-                <input type="text" placeholder="Categoria" required @bind="product.ProductCategory" />
+                <input type="text" placeholder="Foto" @bind="product.Photo" />
+                </div>
+                <div class="user-box">
+                    <select required @bind="product.ProductCategory">
+                        <option value="0" selected disabled hidden>Seleccione una categoria</option>
+                        @foreach (var category in i.Categories)
+                    {
+                            <option value="@category.Name">@category.Name</option>
+                    }
+                    </select>
             </div>
             <button type="submit">Registrar</button>
         </div>
     </EditForm>
 </div>
 
+@if (DialogIsOpen)
+{
+    <Dialog Caption="@title" Message="@message" OnClose="@OnDialogClose" Type="Dialog.Category.Okay" />
+}
+
 @code {
     private AddProduct product = new();
+    private Institution i;
+    [Parameter]
+    public User user { get; set; }
+    [Parameter]
+    public Action MenuTab { get; set; }
+    private bool DialogIsOpen = false;
+    private string? message;
+    private string? title;
+    private bool ProductCreated = false;
+    private EditContext? editContext;
+
+    private void OpenDialog(string t, string msg)
+    {
+        DialogIsOpen = true;
+        title = t;
+        message = msg;
+    }
+    private void OnDialogClose(bool isOk)
+    {
+        if (isOk && ProductCreated)
+        {
+            ProductCreated = false;
+            MenuTab();
+        }
+        DialogIsOpen = false;
+        return;
+    }
+
 
     private async Task HandleSubmit()
     {
-        Console.WriteLine("Submit");
+        if(editContext != null && editContext.Validate())
+        {
+            if(product.ProductCategory != "0")
+            {
+                var firestoreDb = firestoreService.firestoreDb;
+                var products = firestoreDb.Collection("Product");
+                var snapshot = products.WhereEqualTo("Name", product.ProductName).WhereEqualTo("InstitutionId", user.InstitutionId).WhereEqualTo("Status", 1).GetSnapshotAsync();
+
+                if (snapshot.Result.Count == 0)
+                {
+                    var productRef = await products.AddAsync(new Product
+                    {
+                        Name = product.ProductName,
+                        Price = product.ProductPrice,
+                        Description = product.ProductDescription,
+                        InstitutionId = user.InstitutionId,
+                        Category = product.ProductCategory,
+                        Photo = product.Photo,
+                        Status = 1,
+                    });
+                    ProductCreated = true;
+                    OpenDialog("Producto creado", "El producto se ha creado correctamente");
+                }
+                else
+                {
+                    OpenDialog("Error", "El producto ya existe");
+                }
+            } else 
+            {
+                OpenDialog("Error", "Seleccione una categoria");
+            }
+            
+        }
+    }
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(product);
+        var firestoreDb = firestoreService.firestoreDb;
+        var docRef = firestoreDb.Collection("Institution").Document(user.InstitutionId);
+        var snapshot = docRef.GetSnapshotAsync().Result;
+        i = snapshot.ConvertTo<Institution>();
+        if (i != null)
+        {
+            StateHasChanged();
+        }
+
     }
     public class AddProduct
     {
         [Required]
+        [StringLength(50, ErrorMessage = "Nombre demasiado largo."), MinLength(3, ErrorMessage = "Nombre demasiado corto.")]
         public string ProductName { get; set; }
+        public string? Photo { get; set; }
 
         [Required]
-        public string ProductPrice { get; set; }
+        public double ProductPrice { get; set; }
 
         [Required]
+        [StringLength(50, ErrorMessage = "Descripcion demasiado larga."), MinLength(3, ErrorMessage = "Descripcion demasiado corta.")]
         public string ProductDescription { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Seleccione una categoria")]
         public string ProductCategory { get; set; }
 
     }

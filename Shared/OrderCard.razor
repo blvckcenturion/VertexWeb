@@ -1,10 +1,29 @@
- <div class="menu-list-item">
-    <div class="menu-list-item-img">
-        <img src="https://www.hamburguesas.com/wp-content/uploads/2019/05/hamburguesa-vegetariana.jpg" alt="hamburguesa vegetariana">
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+@foreach(var prod in products){
+    <div class="menu-list-item">
+        <div class="menu-list-item-img">
+            @if (prod.Photo != null)
+            {
+                <img src="@prod.Photo" alt="@prod.Name">
+            }
+            else
+            {
+                <span class="fa-solid fa-burger"></span>
+            }
+        </div>
+        <div class="menu-list-item-info">
+            <h2>Producto: @prod.Name</h2>
+            <p>Precio: @prod.Price</p>
+            <p>Cantidad:@order.Detail.Where(x => x.ProductId == prod.Id).ToList()[0].Quantity</p>
+        </div>
     </div>
-    <div class="menu-list-item-info">
-        <h2>Nombre Plato</h2>
-        <p>Descripcion</p>
-        <p>Cantidad</p>
-    </div>
-</div>
+}
+
+@code{
+    [Parameter]
+    public Order order { get; set; }
+
+    [Parameter]
+    public List<Product>? products { get; set; }
+}

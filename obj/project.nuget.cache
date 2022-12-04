@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2tEyGPmcf9ncay8r5oiN3j8ZweQFlOCQ68fmdw3ih6MU7RzgyzpIVHxaHALf/fkvbqwmNGWmPCsDIUoULBsf6A==",
+  "dgSpecHash": "VZcToxyZrFQi8Fh63HAmItIa9S5sBxEN8iNaU3XmPLNQ25Xcjmkj7bUQRbTkRRwYjNj/D7ScnZlqL2bGj6qFsw==",
   "success": true,
   "projectFilePath": "/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/VertexWeb.csproj",
   "expectedPackageFiles": [
@@ -23,6 +23,7 @@
     "/Users/blvckcenturion/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0/microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "/Users/blvckcenturion/.nuget/packages/microsoft.extensions.logging.abstractions/3.0.3/microsoft.extensions.logging.abstractions.3.0.3.nupkg.sha512",
     "/Users/blvckcenturion/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
+    "/Users/blvckcenturion/.nuget/packages/passwordgenerator/2.1.0/passwordgenerator.2.1.0.nupkg.sha512",
     "/Users/blvckcenturion/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/Users/blvckcenturion/.nuget/packages/system.linq.async/6.0.1/system.linq.async.6.0.1.nupkg.sha512",
     "/Users/blvckcenturion/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",

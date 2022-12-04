@@ -1,10 +1,55 @@
+@using System.ComponentModel.DataAnnotations;
+@using Google.Cloud.Firestore;
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+@using System.Security.Cryptography;
+@using System.Text;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@inject NavigationManager navigationManager;
+@inject FirestoreService firestoreService;
+@inject ProtectedLocalStorage protectedLocalStorage;
+
 <div class="employee-container">
 	<div class="image">
-		<img src="images/employee.jpg" width="80" height="80"/>
+		<span class="fa-solid fa-user"></span>
 	</div>
 	<div class="description">
-		<h4>Estiven Vargas</h4>
-		<p>Cocinero</p>
+		<h4>@FirstName @LastName</h4>
+		<p>
+			@if (Role == 2)
+			{
+				<span class="label label-success">Cocinero</span>
+			}
+			else if (Role == 3)
+			{
+				<span class="label label-info">Mesero</span>
+			}
+		</p>
 	</div>
-	<button>Eliminar empleado</button>
+	<button @onclick="DeleteEmployee">Eliminar empleado</button>
 </div>
+
+@code {
+	[Parameter]
+	public string Id { get; set; }
+	[Parameter]
+	public string FirstName { get; set; }
+	[Parameter]
+	public string LastName { get; set; }
+	[Parameter]
+	public int Role { get; set; }
+
+	public async void DeleteEmployee()
+	{
+		var firestoreDb = firestoreService.firestoreDb;
+		var collection = firestoreDb.Collection("User");
+		var document = collection.Document(Id);
+		var snapshot = await document.GetSnapshotAsync();
+		if (snapshot.Exists)
+		{
+			var user = snapshot.ConvertTo<User>();
+			user.Status = 0;
+			await document.SetAsync(user);
+		}
+	}
+}

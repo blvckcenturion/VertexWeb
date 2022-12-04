@@ -22,6 +22,11 @@
     transition: all 0.5s ease-in-out;
 }
 
+
+.top-buttons button:focus{
+    outline: none; 
+}
+
 .top-buttons button:hover {
     background-color: var(--purple-main);
 }
@@ -162,6 +167,20 @@ table {
     color: var(--main-font-color);
     font-family: var(--secondary-font);
 }
+
+
+.top-buttons .btn-active, .orders .btn-active {
+    background-color: var(--purple-main);
+}
+
+.order-section-2 > p, .order-details > p {
+    text-align: center;
+}
+
+.orders button{
+    font-size: 1rem;
+}
+
 
 
 

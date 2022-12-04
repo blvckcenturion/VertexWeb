@@ -1,5 +1,5 @@
 .employee-container[b-geu3uednvl]{
-    width: 250px;
+    height: 10vh;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
 }
 
 .employee-container button[b-geu3uednvl]{
-    width: 95%;
+    width: 100%;
     height: 30px;
     background-color:blueviolet;
     color: white;
@@ -35,4 +35,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.image span[b-geu3uednvl]{
+    width: 100%;
+    height: 100%;
+    background-color: #2C2828;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10vh;
 }

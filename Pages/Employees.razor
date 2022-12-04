@@ -1,89 +1,280 @@
 @page "/employees"
+@using System.ComponentModel.DataAnnotations;
+@using Google.Cloud.Firestore;
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+@using System.Security.Cryptography;
+@using System.Text;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using PasswordGenerator;
+@inject NavigationManager navigationManager;
+@inject FirestoreService firestoreService;
+@inject ProtectedLocalStorage protectedLocalStorage;
+@implements IDisposable
 
-@if (tab == 1)
+<PageTitle>Employees</PageTitle>
+
+@if (render)
 {
+    @if (tab == 1)
+    {
         <div class="employees-page">
             <div class="top-buttons">
                 <button class="btn" style="background-color: var(--purple-main);" @onclick="OnClick1">Ver Empleados</button>
                 <button class="btn" @onclick="OnClick2">Agregar Empleado</button>
-                </div>
-                <div class="employee-container">
-                    <h2>Empleados</h2>
+                                                                                            </div>
+                                                                                            <div class="employee-container">
+                                                                                                <h2>Empleados</h2>
+                @if (employees.Count == 0)
+                {
+                            <div class="no-employees">
+                                <h3>No hay empleados registrados</h3>
+                            </div>
+                }
+                        <div class="list-container">
+                    @foreach (var emp in employees)
+                    {
+                                            <EmployeeCard FirstName="@emp.FirstName" LastName="@emp.LastName" Id="@emp.Id" Role="@emp.Role" />
+                    }
 
-                    <div class="list-container">
-            @for (int i = 0; i < 20; i++)
-            {
-                <EmployeeCard />
-            }
-                </div>
-                </div>
-                </div>
-}
-else if (tab == 2)
-{
-    <div class="employees-page">
+                                    </div>
+
+                                    </div>
+                                    </div>
+    }
+    else if (tab == 2)
+    {
+                                    <div class="employees-page">
         <div class="top-buttons">
             <button class="btn" @onclick="OnClick1">Ver Empleados</button>
             <button class="btn" style="background-color: var(--purple-main);" @onclick="OnClick2">Agregar Empleado</button>
         </div>
-        <EditForm Model="iRegister" OnValidSubmit="HandleSubmit">
+                                                                                                                                                                                                                                                                                            <EditForm Model="u" OnValidSubmit="HandleSubmit">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="form">
-                <h3 class="tittle" for="Tittle">Agregar Empleado</h3>
-
+                                                                                                                                                                                                                                                                                                <h3 class="tittle" for="Tittle">Agregar Empleado</h3>
                 <div class="user-box">
-                    <input type="text" placeholder="Nombres" required @bind="iRegister.Names" />
+                                                                                                                                                                                                                                                                                                    <input type="text" placeholder="Nombres" required @bind="u.FirstName" />
                 </div>
                 <div class="user-box">
-                    <input type="text" placeholder="Apellidos" required @bind="iRegister.Lastnames" />
+                                                                                                                                                                                                                                                                                                    <input type="text" placeholder="Apellidos" required @bind="u.LastName" />
                 </div>
                 <div class="user-box">
-                    <input type="text" placeholder="Numero de Telefono" required @bind="iRegister.PhoneNumber" />
+                                                                                                                                                                                                                                                                            <input type="text" placeholder="Numero de Telefono" required @bind="u.PhoneNumber" />
                 </div>
                 <div class="user-box">
-                    <input type="text" placeholder="Foto" required @bind="iRegister.Photo" />
+                                                                                                            <select required @bind="u.Role">
+                                                                                                                <option value="0">Seleccione un rol</option>
+                                                                                                                <option value="2">Cocinero</option>
+                                                                                                                <option value="3">Mesero</option>
+                                                                                                            </select>
                 </div>
                 <div class="user-box">
-                    <input type="text" placeholder="Rol" required @bind="iRegister.Role" />
-                </div>
-                <div class="user-box">
-                    <input type="text" placeholder="Email" required @bind="iRegister.Email" />
+                                                                                                                                                                                                                                                                                                    <input type="text" placeholder="Email" required @bind="u.Email" />
                 </div>
                 <button type="submit">Agregar Empleado</button>
             </div>
         </EditForm>
     </div>
+    }
+}
+
+@if (DialogIsOpen)
+{
+    <Dialog Caption="@title" Message="@message" OnClose="@OnDialogClose" Type="Dialog.Category.Okay" />
 }
 
 @code {
+    private bool DialogIsOpen = false;
+
+    private string? message;
+    private string? title;
+
+    private bool EmployeeCreated = false;
+    private Employee u = new();
+    private User? userAdmin { get; set; }
+    private EditContext? editContext;
+    private bool render = false;
     int tab = 1;
+    private List<User> employees = new();
+    private FirestoreChangeListener firestoreChangeListener;
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            userAdmin = await new AuthService(protectedLocalStorage).GetUser();
+            if (userAdmin != null)
+            {
+                if (userAdmin.Role == 1)
+                {
+                    var firestoreDb = firestoreService.firestoreDb;
+                    var collection = firestoreDb.Collection("User");
+                    firestoreChangeListener = collection
+                    .WhereEqualTo("InstitutionId", userAdmin.InstitutionId)
+                    .WhereEqualTo("Status", 1)
+                    .Listen(async (snapshot) =>
+                    {
+                        employees.Clear();
+                        foreach (var user in snapshot.Documents.Select(d => d.ConvertTo<User>()))
+                        {
+                            if(user.Role != 1)
+                            {
+                                employees.Add(user);
+                            }
+                        }
+                        Console.WriteLine("Employees: " + employees.Count);
+                        await InvokeAsync(() => StateHasChanged());
+                    });
+                    
+                    render = true;
+                    StateHasChanged();
+                    return;
+                }
+                else
+                {
+                    navigationManager.NavigateTo("/");
+                    await new AuthService(protectedLocalStorage).ClearCredentials();
+                    return;
+                } 
+            }
+            else
+            {
+                navigationManager.NavigateTo("/");
+                await new AuthService(protectedLocalStorage).ClearCredentials();
+                return;
+            }
+        }
+    }
+
+    public void Dispose()
+    {
+        // if the blazor component is pre-rendered, "OnAfterRender" is never called and the "firestoreChangeListener" will be
+        // therefore we need to make sure to check for null with '?'
+        firestoreChangeListener?.StopAsync();
+    }
+
+    private void OpenDialog(string t, string msg)
+    {
+        DialogIsOpen = true;
+        title = t;
+        message = msg;
+    }
+
+    private void OnDialogClose(bool isOk)
+    {
+        if (isOk && EmployeeCreated)
+        {
+            EmployeeCreated = false;
+            u = new();
+            tab = 1;
+            StateHasChanged();
+        }
+        DialogIsOpen = false;
+        return;
+    }
 
     void OnClick1()
     {
         tab = 1;
-        Console.WriteLine(tab);
     }
 
     void OnClick2()
     {
         tab = 2;
-        Console.WriteLine(tab);
+        u = new();
     }
-
-    private InstitutionRegister iRegister = new();
 
     private async Task HandleSubmit()
     {
-        Console.WriteLine("Submit");
+        u.FirstName = u.FirstName.Trim();
+        u.LastName = u.LastName.Trim();
+        u.PhoneNumber = u.PhoneNumber.Trim();
+        u.Email = u.Email.Trim().ToLower();
+
+        if (editContext != null && editContext.Validate())
+        {
+            if (u.PhoneNumber.StartsWith("6") ||
+            u.PhoneNumber.StartsWith("7"))
+            {
+                if (u.Role != 0)
+                {
+                    var firestoreDb = firestoreService.firestoreDb;
+                    var collection = firestoreDb.Collection("User");
+
+                    QuerySnapshot snapshot = await collection.WhereEqualTo("Email", u.Email).WhereEqualTo("Status", 1).GetSnapshotAsync();
+
+                    if (snapshot.Count > 0)
+                    {
+                        OpenDialog("Error", "El correo ingresado ya esta registrado");
+                    }
+                    else
+                    {
+                        snapshot = await collection.WhereEqualTo("PhoneNumber", u.PhoneNumber).WhereEqualTo("Status", 1).GetSnapshotAsync();
+
+                        if (snapshot.Count > 0)
+                        {
+                            OpenDialog("Error", "El numero de telefono ingresado ya esta registrado");
+                        }
+                        else
+                        {
+                            using (var sha256 = SHA256.Create())
+                            {
+                                var password = new Password(12).Next();
+                                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                                var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+                                var user = new User
+                                {
+                                    FirstName = u.FirstName,
+                                    LastName = u.LastName,
+                                    PhoneNumber = u.PhoneNumber,
+                                    Email = u.Email,
+                                    Role = u.Role,
+                                    City = userAdmin.City,
+                                    InstitutionId = userAdmin.InstitutionId,
+                                    Password = hash,
+                                    Status = 1
+                                };
+
+                                var docRef = await collection.AddAsync(user);
+                                EmployeeCreated = true;
+                                OpenDialog("Exito", "El empleado ha sido creado\n Correo: " + u.Email + "\nContraseña: " + password);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else
+        {
+            OpenDialog("Error", "El numero de telefono debe empezar con +591 o 6 o 7");
+            return;
+        }
     }
-    public class InstitutionRegister
+
+    protected override void OnInitialized()
     {
-        public string Names { get; set; }
-        public string Lastnames { get; set; }
+        editContext = new EditContext(u);
+    }
+    public class Employee
+    {
+        [Required]
+        [StringLength(50, ErrorMessage = "Nombre demasiado largo."), MinLength(3, ErrorMessage = "Nombre demasiado corto.")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(50, ErrorMessage = "Apellido demasiado largo."), MinLength(3, ErrorMessage = "Apellido demasiado corto.")]
+        public string LastName { get; set; }
+
+        [Required]
+        [StringLength(9, ErrorMessage = "Telefono demasiado largo."), MinLength(8, ErrorMessage = "Telefono demasiado corto.")]
         public string PhoneNumber { get; set; }
-        public string Photo { get; set; }
-        public string Role { get; set; }
+        [Required]
+        public int Role { get; set; }
+
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
     }
 }

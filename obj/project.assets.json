@@ -310,6 +310,15 @@
           }
         }
       },
+      "PasswordGenerator/2.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/PasswordGenerator.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/PasswordGenerator.dll": {}
+        }
+      },
       "System.Collections.Immutable/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -784,6 +793,18 @@
         "packageIcon.png"
       ]
     },
+    "PasswordGenerator/2.1.0": {
+      "sha512": "G70cCeAOYCk/uTuFw5PBGpYY9kmBZyzld7tphachvyU514PowMRDYyKwTefxIHNGWrhXY2d1DV5B1tDEnTtY3A==",
+      "type": "package",
+      "path": "passwordgenerator/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/PasswordGenerator.dll",
+        "passwordgenerator.2.1.0.nupkg.sha512",
+        "passwordgenerator.nuspec"
+      ]
+    },
     "System.Collections.Immutable/6.0.0": {
       "sha512": "l4zZJ1WU2hqpQQHXz1rvC3etVZN+2DLmQMO79FhOTZHMn8tDRr+WU287sbomD0BETlmKDn0ygUgVy9k5xkkJdA==",
       "type": "package",
@@ -884,7 +905,8 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Google.Cloud.Firestore >= 3.0.0"
+      "Google.Cloud.Firestore >= 3.0.0",
+      "PasswordGenerator >= 2.1.0"
     ]
   },
   "packageFolders": {
@@ -927,6 +949,10 @@
           "Google.Cloud.Firestore": {
             "target": "Package",
             "version": "[3.0.0, )"
+          },
+          "PasswordGenerator": {
+            "target": "Package",
+            "version": "[2.1.0, )"
           }
         },
         "imports": [

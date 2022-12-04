@@ -5,11 +5,29 @@
     padding: 5vh 5vh;
     border-block-end: 1px solid var(--main-font-color);
 }
+.menu-list-item:last-of-type{
+    border-block-end: none;
+}
+
 .menu-list-item-img{
     inline-size: 15vh;
     block-size: 15vh;
     border-radius: 5px;
 }
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+span{
+    font-size:10vh;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
 .menu-list-item-info{
     flex-direction: column;
     justify-content: space-between;

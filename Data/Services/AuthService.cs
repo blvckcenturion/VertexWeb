@@ -26,7 +26,7 @@ public class AuthService
         await _protectedLocalStorage.DeleteAsync("institutionId");
     }
 
-    public async Task<Credentials> GetCredentials()
+    public async Task<Credentials?> GetCredentials()
     {
         var id = await _protectedLocalStorage.GetAsync<string>("id");
         var userType = await _protectedLocalStorage.GetAsync<int>("userType");
@@ -43,15 +43,14 @@ public class AuthService
         return null;
     }
 
-    public async Task<User> GetUser()
+    public async Task<User?> GetUser()
     {
         var credentials = await GetCredentials();
-        Console.WriteLine("YES");
+
         if (credentials != null)
         {
             var firestoreDb = new FirestoreService().firestoreDb;
             var collection = firestoreDb.Collection("User");
-            Console.WriteLine(credentials.Id);
             var snapshot = collection.Document(credentials.Id).GetSnapshotAsync();
 
             if (snapshot != null)

@@ -15,21 +15,21 @@ public class Order
     public string InstitutionId { get; set; }
 
     [FirestoreProperty]
-    public string? TableId { get; set; }
-
-    [FirestoreProperty]
-    public decimal Total { get; set; }
+    public double Total { get; set; }
 
     [FirestoreDocumentCreateTimestamp]
     public DateTime CreatedAt { get; set; }
 
     [FirestoreProperty]
-    public string NIT { get; set; }
+    public string? NIT { get; set; }
 
     [FirestoreProperty]
     // 1: PickUp
     // 2: ForHere
     public int OrderType { get; set; }
+
+    [FirestoreProperty]
+    public string? OrderDetail { get; set; }
 
     [FirestoreProperty]
     public List<OrderDetail> Detail { get; set; }
@@ -38,10 +38,9 @@ public class Order
     [FirestoreProperty]
     // 1: Placed
     // 2: Approved
-    // 3: InProgress
-    // 4: Ready
-    // 5: Delivered
-    // 6: Cancelled
+    // 3: Ready
+    // 4: Delivered
+    // 5: Cancelled
 
     public int Status { get; set; }
 }

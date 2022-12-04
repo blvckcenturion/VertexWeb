@@ -41,7 +41,7 @@ public class Institution
     public string PhoneNumber { get; set; }
 
     [FirestoreProperty]
-    public List<Category>? Menu { get; set; }
+    public List<Category>? Categories { get; set; }
 
     [FirestoreDocumentCreateTimestamp]
     public DateTime CreatedAt { get; set; }
@@ -53,7 +53,7 @@ public class Institution
 
     public Institution()
     {
-        Menu = new List<Category>();
+        Categories = new List<Category>();
         Status = 1;
     }
 }

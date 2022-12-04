@@ -1,4 +1,17 @@
 @page "/dashboard"
+@using System.ComponentModel.DataAnnotations;
+@using Google.Cloud.Firestore;
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+@using System.Security.Cryptography;
+@using System.Text;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using PasswordGenerator;
+@inject NavigationManager navigationManager;
+@inject FirestoreService firestoreService;
+@inject ProtectedLocalStorage protectedLocalStorage;
+
+<PageTitle>Dashboard</PageTitle>
 
 <div class="dashboard-page">
     <div>
@@ -12,6 +25,7 @@
 </div>
 
 @code{
+    public User? user { get; set; }
     public string d1Title = "Bienvenido Carlos.";
     public string d1Subtitle = "20 de Diciembre, 2022";
     public string d1Icon = "fa-solid fa-calendar";
@@ -35,5 +49,14 @@
     public string d6Title = "Ordenes del mes.";
     public string d6Subtitle = "10";
     public string d6Icon = "fa-solid fa-chart-line";
+
+    protected override async void OnInitialized()
+    {
+        user = await new AuthService(protectedLocalStorage).GetUser();
+        if (user == null)
+        {
+            navigationManager.NavigateTo("/");
+        }
+    }
 
 }

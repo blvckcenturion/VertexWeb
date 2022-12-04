@@ -1,4 +1,15 @@
 @using System.ComponentModel.DataAnnotations;
+@using Google.Cloud.Firestore;
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+@using System.Security.Cryptography;
+@using System.Text;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using PasswordGenerator;
+@inject NavigationManager navigationManager;
+@inject FirestoreService firestoreService;
+@inject ProtectedLocalStorage protectedLocalStorage;
+
 <div class="card-body">
     <EditForm Model="category" OnValidSubmit="HandleSubmit">
         <DataAnnotationsValidator />
@@ -7,7 +18,7 @@
             <h3 class="tittle" for="Tittle">Agregar Categoria</h3>
 
             <div class="user-box">
-                <input type="text" placeholder="Nombre de la categoria" required @bind="category.CategoryName" />
+                <input type="text" placeholder="Nombre de la categoria" required @bind="category.Name" />
             </div>
 
             <button type="submit">Registrar</button>
@@ -15,12 +26,71 @@
     </EditForm>
 </div>
 
+@if (DialogIsOpen)
+{
+    <Dialog Caption="@title" Message="@message" OnClose="@OnDialogClose" Type="Dialog.Category.Okay" />
+}
+
 @code {
-    private AddCategory category = new();
+    [Parameter]
+    public User user { get; set; }
+    [Parameter]
+    public Action MenuTab { get; set; }
+    private bool DialogIsOpen = false;
+    private string? message;
+    private string? title;
+    private bool CategoryCreated = false;
+
+    private Category category = new();
+    private EditContext? editContext;
+
+    private void OpenDialog(string t, string msg)
+    {
+        DialogIsOpen = true;
+        title = t;
+        message = msg;
+    }
+    private void OnDialogClose(bool isOk)
+    {
+        if (isOk && CategoryCreated)
+        {
+            CategoryCreated = false;
+            MenuTab();
+        }
+        DialogIsOpen = false;
+        return;
+    }
+
+    protected override void OnInitialized()
+    {
+        editContext = new EditContext(category);
+    }
 
     private async Task HandleSubmit()
     {
-        Console.WriteLine("Submit");
+        if (editContext != null && editContext.Validate())
+        {
+            category.Name = category.Name.Trim();
+            var firestoreDb = firestoreService.firestoreDb;
+            var collection = firestoreDb.Collection("Institution");
+            var document = collection.Document(user.InstitutionId);
+            var snapshot = await document.GetSnapshotAsync();
+            var institution = snapshot.ConvertTo<Institution>();
+            if(institution.Categories != null){
+                if (institution.Categories.Where(x => x.Name.ToLower() == category.Name.ToLower()).Count() == 0)
+                {
+                    institution.Categories.Add(category);
+                    await document.SetAsync(institution);
+                    CategoryCreated = true;
+                    OpenDialog("Categoria creada", "La categoria se ha creado correctamente");
+                }
+                else
+                {
+                    OpenDialog("Error", "La categoria ya existe");
+                }
+            }
+
+        }
     }
     public class AddCategory
     {

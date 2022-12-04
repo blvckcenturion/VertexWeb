@@ -1,56 +1,121 @@
 @page "/menu"
+@using System.ComponentModel.DataAnnotations;
+@using Google.Cloud.Firestore;
+@using VertexWeb.Data.Services;
+@using VertexWeb.Data.Models;
+@using System.Security.Cryptography;
+@using System.Text;
+@using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+@using PasswordGenerator;
+@inject NavigationManager navigationManager;
+@inject FirestoreService firestoreService;
+@inject ProtectedLocalStorage protectedLocalStorage;
 
-<div class="menu-page">
-    <div class="top-buttons">
-    @if (tab == 1)
-    {
-        <button @onclick="MenuTab" class="btn btn-active">Ver Menu</button>
-        <button @onclick="AddProductTab" class="btn">Agregar producto</button>
-        <button @onclick="AddCategoryTab" class="btn">Agregar categoria</button>
-    }
-    else if (tab == 2)
-    {
-        <button @onclick="MenuTab" class="btn">Ver Menu</button>
-        <button @onclick="AddProductTab" class="btn btn-active">Agregar producto</button>
-        <button @onclick="AddCategoryTab" class="btn">Agregar categoria</button>
-    }
-    else if (tab == 3)
-    {
-        <button @onclick="MenuTab" class="btn">Ver Menu</button>
-        <button @onclick="AddProductTab" class="btn">Agregar producto</button>
-        <button @onclick="AddCategoryTab" class="btn btn-active">Agregar categoria</button>
-    }
+@if (render)
+{
+        <div class="menu-page">
+            <div class="top-buttons">
+            @if (tab == 1)
+            {
+                    <button @onclick="MenuTab" class="btn btn-active">Ver Menu</button>
+                    <button @onclick="AddProductTab" class="btn">Agregar producto</button>
+                    <button @onclick="AddCategoryTab" class="btn">Agregar categoria</button>
+            }
+            else if (tab == 2)
+            {
+                    <button @onclick="MenuTab" class="btn">Ver Menu</button>
+                    <button @onclick="AddProductTab" class="btn btn-active">Agregar producto</button>
+                    <button @onclick="AddCategoryTab" class="btn">Agregar categoria</button>
+            }
+            else if (tab == 3)
+            {
+                    <button @onclick="MenuTab" class="btn">Ver Menu</button>
+                    <button @onclick="AddProductTab" class="btn">Agregar producto</button>
+                    <button @onclick="AddCategoryTab" class="btn btn-active">Agregar categoria</button>
+            }
+            </div>
+            <div class="main-section">
+            @if (tab == 1)
+            {
+                                                <MenuCard categories="@productCategories" />
+            }
+            else if (tab == 2)
+            {
+                                                                <AddProductCard user="@user" MenuTab="@MenuTab" />
+            }
+            else if (tab == 3)
+            {
+                                                                    <AddCategoryCard user="@user" MenuTab="@MenuTab" />
+            }
+                                                                </div>
     </div>
-    <div class="main-section">
-        @if (tab == 1)
-        {
-            <MenuCard />
-        }
-        else if (tab == 2)
-        {
-            <AddProductCard />
-        }
-        else if (tab == 3)
-        {
-            <AddCategoryCard />
-        }
-    </div>
-    </div>
+}
+
 @code {
+    [Parameter]
+    public User user { get; set; }
+
+    private bool render = false;
     int tab = 1;
 
     private void MenuTab()
     {
         tab = 1;
+        StateHasChanged();
     }
     private void AddProductTab()
     {
         tab = 2;
+        StateHasChanged();
     }
     private void AddCategoryTab()
     {
         tab = 3;
+        StateHasChanged();
     }
     public string category1Name = "Hamburguesas";
     public string category2Name = "Papas";
+    private FirestoreChangeListener firestoreChangeListener;
+    private List<ProductCategory> productCategories = new List<ProductCategory>();
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            user = await new AuthService(protectedLocalStorage).GetUser();
+            if (user != null)
+            {
+                if (user.Role == 1 || user.Role == 2)
+                {
+                    render = true;
+                    var firestoreDb = firestoreService.firestoreDb;
+                    var collection = firestoreDb.Collection("Product");
+                    firestoreChangeListener = collection
+                    .WhereEqualTo("InstitutionId", user.InstitutionId)
+                    .WhereEqualTo("Status", 1)
+                    .Listen(async (snapshot) =>
+                    {
+                        productCategories.Clear();
+                        var categories = snapshot.Documents.Select(x => x.ConvertTo<Product>()).GroupBy(x => x.Category).Select(x =>
+    x.First()).ToList();
+                        foreach (var category in categories)
+                        {
+                            ProductCategory p = new ProductCategory();
+                            p.Name = category.Category;
+                            p.Products = snapshot.Documents.Select(x => x.ConvertTo<Product>()).Where(x => x.Category ==
+        category.Category).ToList();
+                            productCategories.Add(p);
+                        }
+
+                        await InvokeAsync(() => StateHasChanged());
+
+                    });
+                    return;
+
+                }
+            }
+            navigationManager.NavigateTo("/");
+            await new AuthService(protectedLocalStorage).ClearCredentials();
+        }
+    }
 }

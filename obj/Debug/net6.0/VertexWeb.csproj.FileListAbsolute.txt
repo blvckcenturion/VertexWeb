@@ -62,6 +62,7 @@ C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/obj/D
 C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/obj/Debug/net6.0/scopedcss/Shared/MenuCard.razor.rz.scp.css
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/appsettings.Development.json
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/appsettings.json
+/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/POS.json
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/VertexWeb.staticwebassets.runtime.json
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/VertexWeb
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/VertexWeb.deps.json
@@ -86,6 +87,7 @@ C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/obj/D
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/Grpc.Net.Common.dll
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/Microsoft.Bcl.AsyncInterfaces.dll
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/Newtonsoft.Json.dll
+/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/PasswordGenerator.dll
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/System.Linq.Async.dll
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/VertexWeb.csproj.AssemblyReference.cache
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/VertexWeb.GeneratedMSBuildEditorConfig.editorconfig
@@ -105,7 +107,6 @@ C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/obj/D
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/scopedcss/Pages/Register.razor.rz.scp.css
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/scopedcss/Shared/AddCategoryCard.razor.rz.scp.css
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/scopedcss/Shared/AddProductCard.razor.rz.scp.css
-/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/scopedcss/Shared/Category.razor.rz.scp.css
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/scopedcss/Shared/DashboardCard.razor.rz.scp.css
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/scopedcss/Shared/Dialog.razor.rz.scp.css
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/scopedcss/Shared/EmployeeCard.razor.rz.scp.css
@@ -122,4 +123,4 @@ C:/Users/SANTIAGO/Dev/University/4th Semester/IntegrationalProject/Vertex2/obj/D
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/VertexWeb.pdb
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/VertexWeb.genruntimeconfig.cache
 /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/ref/VertexWeb.dll
-/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/bin/Debug/net6.0/POS.json
+/Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb/obj/Debug/net6.0/scopedcss/Shared/CategoryCard.razor.rz.scp.css
