@@ -1,0 +1,48 @@
+.employee-container[b-geu3uednvl]{
+    height: 10vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: #2C2828;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.description[b-geu3uednvl]{
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.description p[b-geu3uednvl]{
+    text-align:center;
+}
+
+.employee-container button[b-geu3uednvl]{
+    width: 100%;
+    height: 30px;
+    background-color:blueviolet;
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+.image[b-geu3uednvl]{
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.image span[b-geu3uednvl]{
+    width: 100%;
+    height: 100%;
+    background-color: #2C2828;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10vh;
+}

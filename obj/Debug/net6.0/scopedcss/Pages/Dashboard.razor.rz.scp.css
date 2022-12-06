@@ -1,0 +1,17 @@
+.dashboard-page[b-omwin17ub0]{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dashboard-page > div[b-omwin17ub0]{
+    width: 90%;
+    height: 60%;
+    display: grid;
+    gap: 4rem;
+    grid-template-columns: repeat(3, 1fr);
+}
+
