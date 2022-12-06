@@ -22,7 +22,6 @@
     transition: all 0.5s ease-in-out;
 }
 
-
 .top-buttons button:focus{
     outline: none; 
 }

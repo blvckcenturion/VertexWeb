@@ -108,6 +108,27 @@
                                                     <td>@current.OrderDetail</td>
                                                 </tr>
                                 }
+                                @if(user.Role == 1){
+                                    <tr>
+                                        <td>Estado</td>
+                                        @if (current.Status == 1)
+                                        {
+                                            <td>En Proceso de Aprobacion</td>
+                                        }
+                                        else if (current.Status == 2)
+                                        {
+                                            <td>Aprobado</td>
+                                        }
+                                        else if (current.Status == 3)
+                                        {
+                                            <td>Preparado</td>
+                                        } else if(current.Status == 4){
+                                            <td>Entregado</td>
+                                        } else {
+                                            <td>Cancelado</td>
+                                        }
+                                    </tr>
+                                }
                                                                                 <tr>
                                                                                     <td>Subtotal</td>
                                                                                     <td>

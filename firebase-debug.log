@@ -1,0 +1,109 @@
+[debug] [2022-12-06T01:43:25.508Z] ----------------------------------------------------------------------
+[debug] [2022-12-06T01:43:25.509Z] Command:       /opt/homebrew/Cellar/node/19.2.0/bin/node /opt/homebrew/bin/firebase init
+[debug] [2022-12-06T01:43:25.509Z] CLI Version:   11.16.1
+[debug] [2022-12-06T01:43:25.510Z] Platform:      darwin
+[debug] [2022-12-06T01:43:25.510Z] Node Version:  v19.2.0
+[debug] [2022-12-06T01:43:25.510Z] Time:          Mon Dec 05 2022 21:43:25 GMT-0400 (Bolivia Time)
+[debug] [2022-12-06T01:43:25.510Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-12-06T01:43:25.512Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-12-06T01:43:25.513Z] > authorizing via signed-in user (santiagosarabiasainz@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2022-12-06T01:43:51.164Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2022-12-06T01:43:51.165Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"blazor-firebase-vertex","name":"blazor-pos"}
+[debug] [2022-12-06T01:43:52.516Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2022-12-06T01:43:52.516Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/cp.7244786708215094701"}
+[debug] [2022-12-06T01:43:52.518Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 [none]
+[debug] [2022-12-06T01:43:53.604Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 200
+[debug] [2022-12-06T01:43:53.604Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 {"name":"operations/cp.7244786708215094701"}
+[debug] [2022-12-06T01:43:54.106Z] [Project Creation Poller] Retrying task index 0
+[debug] [2022-12-06T01:43:54.107Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 [none]
+[debug] [2022-12-06T01:43:54.590Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 200
+[debug] [2022-12-06T01:43:54.591Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 {"name":"operations/cp.7244786708215094701"}
+[debug] [2022-12-06T01:43:55.592Z] [Project Creation Poller] Retrying task index 0
+[debug] [2022-12-06T01:43:55.592Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 [none]
+[debug] [2022-12-06T01:43:56.064Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 200
+[debug] [2022-12-06T01:43:56.064Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 {"name":"operations/cp.7244786708215094701","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","gettable":true}}
+[debug] [2022-12-06T01:43:58.064Z] [Project Creation Poller] Retrying task index 0
+[debug] [2022-12-06T01:43:58.065Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 [none]
+[debug] [2022-12-06T01:43:58.581Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 200
+[debug] [2022-12-06T01:43:58.581Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/cp.7244786708215094701 {"name":"operations/cp.7244786708215094701","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","gettable":true,"ready":true},"done":true,"response":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.Project","projectNumber":"567806389265","projectId":"blazor-firebase-vertex","lifecycleState":"ACTIVE","name":"blazor-pos","createTime":"2022-12-06T01:43:52.406Z"}}
+[debug] [2022-12-06T01:43:58.583Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1beta1/projects/blazor-firebase-vertex:addFirebase [none]
+[debug] [2022-12-06T01:44:01.652Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1beta1/projects/blazor-firebase-vertex:addFirebase 200
+[debug] [2022-12-06T01:44:01.652Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1beta1/projects/blazor-firebase-vertex:addFirebase {"name":"operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz"}
+[debug] [2022-12-06T01:44:01.652Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz [none]
+[debug] [2022-12-06T01:44:02.530Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz 200
+[debug] [2022-12-06T01:44:02.530Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz {"name":"operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz"}
+[debug] [2022-12-06T01:44:03.031Z] [Add Firebase Poller] Retrying task index 0
+[debug] [2022-12-06T01:44:03.032Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz [none]
+[debug] [2022-12-06T01:44:04.022Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz 200
+[debug] [2022-12-06T01:44:04.023Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz {"name":"operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz"}
+[debug] [2022-12-06T01:44:05.024Z] [Add Firebase Poller] Retrying task index 0
+[debug] [2022-12-06T01:44:05.025Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz [none]
+[debug] [2022-12-06T01:44:05.760Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz 200
+[debug] [2022-12-06T01:44:05.761Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz {"name":"operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz"}
+[debug] [2022-12-06T01:44:07.763Z] [Add Firebase Poller] Retrying task index 0
+[debug] [2022-12-06T01:44:07.764Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz [none]
+[debug] [2022-12-06T01:44:08.485Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz 200
+[debug] [2022-12-06T01:44:08.485Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz {"name":"operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz"}
+[debug] [2022-12-06T01:44:12.487Z] [Add Firebase Poller] Retrying task index 0
+[debug] [2022-12-06T01:44:12.489Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz [none]
+[debug] [2022-12-06T01:44:13.007Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz 200
+[debug] [2022-12-06T01:44:13.008Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz {"name":"operations/workflows/M2JkOGZkNGQtMzVlOC00ODk1LWE2MTEtZmRiOGU0M2E0ZDMz","done":true,"response":{"@type":"type.googleapis.com/google.firebase.service.v1beta1.FirebaseProject","projectId":"blazor-firebase-vertex","projectNumber":"567806389265","displayName":"blazor-pos","name":"projects/blazor-firebase-vertex","resources":{"hostingSite":"blazor-firebase-vertex"}}}
+[info] 
+[info] 🎉🎉🎉 Your Firebase project is ready! 🎉🎉🎉
+[info] 
+[info] Project information:
+[info]    - Project ID: blazor-firebase-vertex
+[info]    - Project Name: blazor-pos
+[info] 
+[info] Firebase console is available at
+[info] https://console.firebase.google.com/project/blazor-firebase-vertex/overview
+[info] i  Using project blazor-firebase-vertex (blazor-pos) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2022-12-06T01:46:13.296Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2022-12-06T01:46:13.652Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2022-12-06T01:46:13.653Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"9.14.0","browserURL":"https://www.gstatic.com/firebasejs/9.14.0/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/9.14.0/firebase.tgz"},"live":{"version":"9.14","browserURL":"https://www.gstatic.com/firebasejs/live/9.14/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/9.14/firebase.tgz"},"components":{"analytics":"https://www.gstatic.com/firebasejs/9.14.0/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js","app-check":"https://www.gstatic.com/firebasejs/9.14.0/firebase-app-check.js","auth":"https://www.gstatic.com/firebasejs/9.14.0/firebase-auth.js","auth/cordova":"https://www.gstatic.com/firebasejs/9.14.0/firebase-auth/cordova.js","auth/react-native":"https://www.gstatic.com/firebasejs/9.14.0/firebase-auth/react-native.js","functions":"https://www.gstatic.com/firebasejs/9.14.0/firebase-functions.js","firestore":"https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.js","firestore/lite":"https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore/lite.js","installations":"https://www.gstatic.com/firebasejs/9.14.0/firebase-installations.js","storage":"https://www.gstatic.com/firebasejs/9.14.0/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/9.14.0/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/9.14.0/firebase-remote-config.js","messaging":"https://www.gstatic.com/firebasejs/9.14.0/firebase-messaging.js","messaging/sw":"https://www.gstatic.com/firebasejs/9.14.0/firebase-messaging/sw.js","database":"https://www.gstatic.com/firebasejs/9.14.0/firebase-database.js","firestore.memory":"https://www.gstatic.com/firebasejs/9.14.0/firebase-firestore.memory.js"}}
+[info] ✔  Wrote blazor-pos/index.html 
+[info] 
+[info] i  Detected a .git folder at /Users/blvckcenturion/Dev/University/IntegrationalProject/VertexWeb 
+[info] i  Authorizing with GitHub to upload your service account to a GitHub repository's secrets store. 
+[info] 
+[info] Visit this URL on this device to log in:
+[info] https://github.com/login/oauth/authorize?client_id=89cf50f02ac6aaed3484&state=274906554&redirect_uri=http%3A%2F%2Flocalhost%3A9005&scope=read%3Auser%20repo%20public_repo
+[info] 
+[info] Waiting for authentication...
+[debug] [2022-12-06T01:46:30.286Z] >>> [apiv2][query] POST https://github.com/login/oauth/access_token [none]
+[debug] [2022-12-06T01:46:30.286Z] >>> [apiv2][body] POST https://github.com/login/oauth/access_token [stream]
+[debug] [2022-12-06T01:46:30.909Z] <<< [apiv2][status] POST https://github.com/login/oauth/access_token 200
+[debug] [2022-12-06T01:46:30.910Z] <<< [apiv2][body] POST https://github.com/login/oauth/access_token {"access_token":"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","token_type":"bearer","scope":"read:user,repo"}
+[debug] [2022-12-06T01:46:30.920Z] >>> [apiv2][query] GET https://api.github.com/user [none]
+[debug] [2022-12-06T01:46:31.497Z] <<< [apiv2][status] GET https://api.github.com/user 200
+[debug] [2022-12-06T01:46:31.497Z] <<< [apiv2][body] GET https://api.github.com/user {"login":"blvckcenturion","id":63882089,"node_id":"MDQ6VXNlcjYzODgyMDg5","avatar_url":"https://avatars.githubusercontent.com/u/63882089?v=4","gravatar_id":"","url":"https://api.github.com/users/blvckcenturion","html_url":"https://github.com/blvckcenturion","followers_url":"https://api.github.com/users/blvckcenturion/followers","following_url":"https://api.github.com/users/blvckcenturion/following{/other_user}","gists_url":"https://api.github.com/users/blvckcenturion/gists{/gist_id}","starred_url":"https://api.github.com/users/blvckcenturion/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/blvckcenturion/subscriptions","organizations_url":"https://api.github.com/users/blvckcenturion/orgs","repos_url":"https://api.github.com/users/blvckcenturion/repos","events_url":"https://api.github.com/users/blvckcenturion/events{/privacy}","received_events_url":"https://api.github.com/users/blvckcenturion/received_events","type":"User","site_admin":false,"name":"Santiago Sarabia","company":null,"blog":"","location":"Latam","email":null,"hireable":true,"bio":"Tech lover, always open to connect with more people and learn!","twitter_username":"STGSarabia","public_repos":63,"public_gists":1,"followers":4,"following":3,"created_at":"2020-04-17T21:45:18Z","updated_at":"2022-12-05T15:11:35Z","private_gists":0,"total_private_repos":13,"owned_private_repos":13,"disk_usage":355109,"collaborators":4,"two_factor_authentication":false,"plan":{"name":"pro","space":976562499,"collaborators":0,"private_repos":9999}}
+[info] 
+[info] ✔  Success! Logged into GitHub as blvckcenturion 
+[info] 
